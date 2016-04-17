@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block styles %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('lib/metis/assets/css/dataTables.bootstrap.css') }}">
+{% endblock styles %}
+
+{% block title_content %}<i class="fa fa-user"></i>&nbsp; Все пользователи{% endblock title_content %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box">
+                <header>
+                    <div class="icons">
+                        <i class="fa fa-table"></i>
+                    </div>
+                    <h5>Таблица пользователей</h5>
+                </header>
+                <div id="collapse4" class="body">
+                    {{ grid_search(grid, '::grid.html.twig') }}
+                    {{ grid(grid, '::grid.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,37 @@
+{% extends ':office:base.html.twig' %}
+
+{% block title %}{{ 'deposit.deposit'|trans }}{% endblock %}
+
+{% block title_content %}
+    {{ 'deposit.deposit'|trans }}
+{% endblock %}
+
+{% block content %}
+    <div class="innerLR">
+        <div class="row-fluid">
+            <!-- Column -->
+            <div class="span12">
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    {% include ':office:alert_success.html.twig' with {'message' : flashMessage} %}
+                {% endfor %}
+                {% for flashMessage in app.session.flashbag.get('error') %}
+                    {% include ':office:alert_error.html.twig' with {'message' : flashMessage} %}
+                {% endfor %}
+                <!-- Widget -->
+                <div class="widget">
+                    <!-- Widget heading -->
+                    <div class="widget-head">
+                        <h4 class="heading">
+                            {{ 'deposit.stattistic'|trans }}
+                        </h4>
+                    </div>
+                    <!-- // Widget heading END -->
+
+                    <div class="widget-body" style="">
+                        {{ grid(grid, ':office:grid.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

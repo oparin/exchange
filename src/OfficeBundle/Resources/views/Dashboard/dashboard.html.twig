@@ -1,0 +1,849 @@
+{% extends ':office:base.html.twig' %}
+
+{% block style %}
+    <style>
+        .legendLabel {
+            color: yellow;
+            padding-left: 5px;
+        }
+    </style>
+    <link href="{{ asset('css/liquidcarousel.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('lib/mediaelement/mediaelementplayer.css') }}" /></code>
+{% endblock style %}
+
+{% block title %}{{ 'dashboard.dashboard'|trans }}{% endblock %}
+
+{% block title_content %}
+    {{ 'dashboard.dashboard'|trans }}
+{% endblock %}
+
+{% block content %}
+    <div class="innerLR">
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            {% include ':office:alert_success.html.twig' with {'message' : flashMessage} %}
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('error') %}
+            {% include ':office:alert_error.html.twig' with {'message' : flashMessage} %}
+        {% endfor %}
+        <!-- Website Traffic Chart -->
+        <div class="widget" data-toggle="collapse-widget">
+            <div class="widget-head">
+                <h4 class="heading glyphicons cardio"><i></i>{{ 'dashboard.statistic'|trans }}</h4>
+            </div>
+            <div class="widget-body">
+                {#<div id="chart_simple" style="height: 250px;"></div>#}
+                <div id="chart_lines_fill_nopoints" style="height: 250px;"></div>
+            </div>
+        </div>
+        <!-- // Website Traffic Chart END -->
+
+        <!-- Stats Widgets -->
+        <div class="row-fluid widget-stats-group">
+            {% set wallets = app.user.wallets %}
+            <div class="span2">
+
+                <!-- Stats Widget -->
+                <a href="" class="widget-stats" style="cursor: default; pointer-events: none;">
+                    <span class="glyphicons usd"><i></i></span>
+                    <span class="txt">{{ 'dashboard.main_wallet'|trans }}</span>
+                    <div class="clearfix"></div>
+                    <span class="count label label-success">&dollar;{{ wallets[0].sum }}</span>
+                </a>
+                <!-- // Stats Widget END -->
+
+            </div>
+            {% set accounts = app.user.accounts %}
+            <div class="span2">
+
+                <!-- Stats Widget -->
+                <a href="{{ path('office_money_transaction') }}" class="widget-stats" style="background-image: linear-gradient(to bottom, #4b4b4b, blue)">
+                    <span class="glyphicons usd"><i></i></span>
+                    <span class="txt">{{ 'dashboard.main_account'|trans }}</span>
+                    <div class="clearfix"></div>
+                    <span class="count label label-success">&dollar;{{ accounts[0].sum }}</span>
+                </a>
+                <!-- // Stats Widget END -->
+
+            </div>
+            {% set accounts = app.user.currency %}
+            <div class="span2">
+
+                <!-- Stats Widget -->
+                <a href="" class="widget-stats" style="cursor: default; pointer-events: none;">
+                    {#<span class="glyphicons usd"><i></i></span>#}
+                    <h2>{{ currency }}</h2>
+                    <span class="txt">{{ 'dashboard.main_account'|trans }}</span>
+                    <div class="clearfix"></div>
+                    <span class="count label label-success">{{ accounts[0].sum }}</span>
+                </a>
+                <!-- // Stats Widget END -->
+
+            </div>
+            <div class="span2">
+
+                <!-- Stats Widget -->
+                <a href="" class="widget-stats" style="cursor: default; pointer-events: none;">
+                    {#<span class="glyphicons usd"><i></i></span>#}
+                    <h2>{{ currency }}</h2>
+                    <span class="txt">{{ 'dashboard.pool_wallet'|trans }}</span>
+                    <div class="clearfix"></div>
+                    <span class="count label label-success">{{ app.user.poolWallet }}</span>
+                </a>
+                <!-- // Stats Widget END -->
+
+            </div>
+
+            <div class="span2">
+
+                <!-- Stats Widget -->
+                <a href="" class="widget-stats" style="cursor: default; pointer-events: none;">
+                    {#<span class="glyphicons usd"><i></i></span>#}
+                    <h2>{{ currency }}</h2>
+                    <span class="txt">{{ 'dashboard.mining_rights'|trans }}</span>
+                    <div class="clearfix"></div>
+                    <span class="count label label-success">{{ app.user.miningRights }}</span>
+                </a>
+                <!-- // Stats Widget END -->
+
+            </div>
+
+            <div class="span2">
+
+                <!-- Stats Widget -->
+                <a href="" class="widget-stats" style="cursor: default; pointer-events: none;">
+                    {#<span class="glyphicons usd"><i></i></span>#}
+                    <h2>{{ currency }}</h2>
+                    <span class="txt">{{ 'dashboard.mining_rights_in_work'|trans }}</span>
+                    <div class="clearfix"></div>
+                    <span class="count label label-success">{{ app.user.miningRightsInWork }}</span>
+                </a>
+                <!-- // Stats Widget END -->
+
+            </div>
+
+
+            {#<div class="span1 center hidden-phone">#}
+                {#<a class="btn btn-small btn-default glyphicons standard chevron-right"><i></i></a>#}
+            {#</div>#}
+
+        </div>
+        <div class="separator bottom"></div>
+        <!-- // Stats Widgets END -->
+
+        <!-- Stats Widgets -->
+        {#<div class="row-fluid widget-stats-group">#}
+            {#{% set accounts = app.user.currency %}#}
+            {#<div class="span4">#}
+
+                {#<!-- Stats Widget -->#}
+                {#<a href="" class="widget-stats">#}
+                    {#<h1>{{ currency }}</h1>#}
+                    {#<span class="txt">{{ 'dashboard.main_account'|trans }}</span>#}
+                    {#<div class="clearfix"></div>#}
+                    {#<span class="count label label-success">{{ accounts[0].sum }}</span>#}
+                {#</a>#}
+                {#<!-- // Stats Widget END -->#}
+
+            {#</div>#}
+            {#&#123;&#35;<div class="span4">&#35;&#125;#}
+
+                {#&#123;&#35;<!-- Stats Widget -->&#35;&#125;#}
+                {#&#123;&#35;<a href="" class="widget-stats">&#35;&#125;#}
+                    {#&#123;&#35;<h1>{{ currency }}</h1>&#35;&#125;#}
+                    {#&#123;&#35;<span class="txt">{{ 'dashboard.arbitrage_account'|trans }}</span>&#35;&#125;#}
+                    {#&#123;&#35;<div class="clearfix"></div>&#35;&#125;#}
+                    {#&#123;&#35;<span class="count label label-success">{{ accounts[1].sum }}</span>&#35;&#125;#}
+                {#&#123;&#35;</a>&#35;&#125;#}
+                {#&#123;&#35;<!-- // Stats Widget END -->&#35;&#125;#}
+
+            {#&#123;&#35;</div>&#35;&#125;#}
+            {#<div class="span4">#}
+
+                {#<!-- Stats Widget -->#}
+                {#<a href="" class="widget-stats">#}
+                    {#<h1>{{ currency }}</h1>#}
+                    {#<span class="txt">{{ 'dashboard.bonus_account'|trans }}</span>#}
+                    {#<div class="clearfix"></div>#}
+                    {#<span class="count label label-success">{{ accounts[2].sum }}</span>#}
+                {#</a>#}
+                {#<!-- // Stats Widget END -->#}
+
+            {#</div>#}
+
+        {#</div>#}
+        {#<div class="separator bottom"></div>#}
+        <!-- // Stats Widgets END -->
+
+        <div class="tickertape">
+            <strong class="title">Important</strong>
+		<span class="marquee">
+			<span>{{ settings.tickerOne }}</span>
+			<span>{{ settings.tickerTwo }}</span>
+		</span>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span6">
+
+                <!-- FAQ Widget -->
+                {% for faq in faqs %}
+                    <div class="widget widget-scroll" data-scroll-height="223px" data-toggle="collapse-widget" data-collapse-closed="true">
+
+                        <!-- Widget Heading -->
+                        <div class="widget-head">
+                            <h4 class="heading glyphicons conversation"><i></i>{{ faq.title }}</h4>
+                        </div>
+                        <!-- // Widget Heading END -->
+
+                        <div class="widget-body">
+                            {{ faq.text|raw }}
+                        </div>
+                    </div>
+                {% endfor %}
+                <!-- // FAQ Widget END -->
+
+            </div>
+            <div class="span6">
+
+                <!-- Chat -->
+                <div class="widget margin-none" style="padding-bottom: 10px">
+
+                    <div class="widget-head">
+                        <h4 class="heading">{{ 'dashboard.news'|trans }}</h4>
+                    </div>
+                    <div class="widget-body">
+
+                        <!-- Slim Scroll -->
+                        <div class="slim-scroll chat-items" data-scroll-height="222px">
+                            {% for news in all_news %}
+                                <!-- Media item -->
+                                <div class="media">
+                                    <div class="media-object {% if loop.index % loop.index == 0 %}pull-left{% else %}pull-right{% endif %} thumb">
+                                        <img src="{{ asset('images/admin-icon.png') }}" width="51" alt="Image">
+                                    </div>
+                                    <div class="media-body">
+                                        <blockquote>
+                                            <small><cite>{{ news.date|date('d M, Y') }}</cite></small>
+                                            <p style="font-weight: bold">{{ news.title }}</p>
+                                            <p>{{ news.text|raw }}</p>
+                                        </blockquote>
+                                    </div>
+                                </div>
+                                <!-- // Media item END -->
+                            {% endfor %}
+                        </div>
+                        <!-- // Slim Scroll END -->
+
+                    </div>
+
+                    {#<div class="chat-controls">#}
+                        {#<div class="innerLR">#}
+                            {#<form class="margin-none">#}
+                                {#<div class="row-fluid">#}
+                                    {#<div class="span10">#}
+                                        {#<input type="text" name="message" class="input-block-level margin-none" placeholder="Type your message .." />#}
+                                    {#</div>#}
+                                    {#<div class="span2">#}
+                                        {#<button type="submit" class="btn btn-block btn-inverse">Send</button>#}
+                                    {#</div>#}
+                                {#</div>#}
+                            {#</form>#}
+                        {#</div>#}
+                    {#</div>#}
+
+                </div>
+                <!-- // Chat END -->
+
+            </div>
+        </div>
+        <div class="separator bottom"></div>
+
+    </div>
+
+    <div class="widget widget-gallery widget-gallery-slide margin-bottom-none" data-toggle="collapse-widget">
+        <div class="widget-head"><h4 class="heading">{{ 'dashboard.video_gallery'|trans }}</h4></div>
+        <div class="widget-body">
+
+            <!-- Gallery Layout -->
+            {#<div class="gallery gallery-2">#}
+                {#<ul class="row-fluid" data-toggle="modal-gallery" data-target="#modal-gallery" id="gallery-4" data-delegate="#gallery-4">#}
+                    {#<li class="span3"><a class="thumb" href="{{ asset('lib/argo/common/theme/images/gallery-2/1.jpg') }}" data-gallery="gallery"><img src="{{ asset('lib/argo/common/theme/images/gallery-2/1.jpg') }}" alt="photo" /></a></li>#}
+                    {#<li class="span3"><a class="thumb" href="{{ asset('lib/argo/common/theme/images/gallery-2/2.jpg') }}" data-gallery="gallery"><img src="{{ asset('lib/argo/common/theme/images/gallery-2/2.jpg') }}" alt="photo" /></a></li>#}
+                    {#<li class="span3"><a class="thumb" href="{{ asset('lib/argo/common/theme/images/gallery-2/3.jpg') }}" data-gallery="gallery"><img src="{{ asset('lib/argo/common/theme/images/gallery-2/3.jpg') }}" alt="photo" /></a></li>#}
+                    {#<li class="span3"><a class="thumb" href="{{ asset('lib/argo/common/theme/images/gallery-2/4.jpg') }}" data-gallery="gallery"><img src="{{ asset('lib/argo/common/theme/images/gallery-2/4.jpg') }}" alt="photo" /></a></li>#}
+                {#</ul>#}
+            {#</div>#}
+            <!-- // Gallery Layout END -->
+
+            {#<span class="nav nav-left disabled glyphicons standard left_arrow"><i></i></span>#}
+            {#<span href="" class="nav nav-right glyphicons standard right_arrow"><i></i></span>#}
+
+            <!-- Gallery Layout -->
+            <div id="liquid1" class="liquid">
+                <span class="previous"></span>
+                {#<span class="previous nav nav-left disabled glyphicons standard left_arrow"><i></i></span>#}
+                <div class="wrapper gallery gallery-2">
+                    <ul data-toggle="modal-gallery" data-target="#modal-gallery" id="gallery-4" data-delegate="#gallery-4">
+                        {#<li class="span3" style="width: 200px"><a class="thumb" href="#" title="image 01"><img src="{{ asset('lib/argo/common/theme/images/gallery-2/1.jpg') }}" alt="image 01" border="0" /></a></li>#}
+                        {#<li class="span3" style="width: 200px"><a class="thumb" href="#" title="image 01"><img src="{{ asset('lib/argo/common/theme/images/gallery-2/1.jpg') }}" alt="image 01" border="0" /></a></li>#}
+                        {#<li class="span3" style="width: 200px"><a class="thumb" href="#" title="image 01"><img src="{{ asset('lib/argo/common/theme/images/gallery-2/1.jpg') }}" alt="image 01" border="0" /></a></li>#}
+                        {#<li class="span3" style="width: 200px"><a class="thumb" href="#" title="image 01"><img src="{{ asset('lib/argo/common/theme/images/gallery-2/1.jpg') }}" alt="image 01" border="0" /></a></li>#}
+                        {#<li class="span3" style="width: 200px"><a class="thumb" href="#" title="image 01"><img src="{{ asset('lib/argo/common/theme/images/gallery-2/1.jpg') }}" alt="image 01" border="0" /></a></li>#}
+                        {#<li class="span3" style="width: 200px"><a class="thumb" href="#" title="image 01"><img src="{{ asset('lib/argo/common/theme/images/gallery-2/1.jpg') }}" alt="image 01" border="0" /></a></li>#}
+                        {#<li class="span3" style="width: 200px"><a class="thumb" href="#" title="image 01"><img src="{{ asset('lib/argo/common/theme/images/gallery-2/1.jpg') }}" alt="image 01" border="0" /></a></li>#}
+                        {#<li class="span3" style="width: 200px"><a class="thumb" href="#" title="image 01"><img src="{{ asset('lib/argo/common/theme/images/gallery-2/1.jpg') }}" alt="image 01" border="0" /></a></li>#}
+                        {% for video in videos %}
+                        <li class="span3" style="width: 200px">
+                            <span class="thumb">
+                                {#<img src="{{ asset('lib/argo/common/theme/images/gallery-2/1.jpg') }}" alt="image 01" border="0" />#}
+                                <video width="180" height="130">
+                                    <source src="/uploads/video/{{ video.video }}">
+                                </video>
+                            </span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <span class="next"></span>
+            </div>
+            <!-- // Gallery Layout END -->
+        </div>
+    </div>
+
+    <div class="row-fluid row-merge border-bottom">
+        <div class="span6">
+
+            <!-- Inner -->
+            <div class="innerAll">
+
+                <!-- Row -->
+                <div class="row-fluid">
+                    <div class="span4">
+
+                        <!-- Stats Widget -->
+                        <a href="{{ path('referrals_my_referrals') }}" class="widget-stats widget-stats-2">
+                            {#<span class="sparkline"></span>#}
+                            <span>
+                                <img src="{{ asset('images/user_ref.png') }}" width="32">
+                            </span>
+                            <span class="txt">
+                                <span class="count">{{ count_referrals }}</span>
+                                <br>
+                                {{ 'dashboard.count_referrals'|trans }}
+                            </span>
+                            <div class="clearfix"></div>
+                        </a>
+                        <!-- // Stats Widget END -->
+
+                    </div>
+                    <div class="span4">
+
+                        <!-- Stats Widget -->
+                        {#<a href="" class="widget-stats widget-stats-2 widget-stats-3">#}
+                        <a href="{{ path('referrals_statistic') }}" class="widget-stats widget-stats-2">
+                            {#<span class="sparkline success"></span>#}
+                            <span>
+                                <img src="{{ asset('images/ref_bonus.png') }}" width="32">
+                            </span>
+                            <span class="txt">
+                                <span class="count">{{ referral_bonus }}$</span>
+                                <br>
+                                {{ 'dashboard.referral_bonus'|trans }}
+                            </span>
+                            <div class="clearfix"></div>
+                        </a>
+                        <!-- // Stats Widget END -->
+
+                    </div>
+                    <div class="span4">
+
+                        <!-- Stats Widget -->
+                        {#<a href="" class="widget-stats widget-stats-2 widget-stats-3">#}
+                        <a href="{{ path('office_deposit_statistic') }}" class="widget-stats widget-stats-2">
+                            {#<span class="sparkline success"></span>#}
+                            <span>
+                                <img src="{{ asset('images/my_money.png') }}" width="32">
+                            </span>
+                            <span class="txt">
+                                <span class="count">{{ all_deposit }}$</span>
+                                <br>
+                                &nbsp;&nbsp;{{ 'dashboard.count_deposit'|trans }}&nbsp;&nbsp;
+                            </span>
+                            <div class="clearfix"></div>
+                        </a>
+                        <!-- // Stats Widget END -->
+
+                    </div>
+                </div>
+                <!-- // Row END -->
+
+            </div>
+            <!-- // Inner END -->
+
+        </div>
+        <div class="span6">
+
+            <!-- Inner -->
+            <div class="innerAll">
+
+                <!-- Row -->
+                <div class="row-fluid">
+                    <div class="span4">
+
+                        <!-- Stats Widget -->
+                        <a href="{{ path('office_withdraw_statistic') }}" class="widget-stats widget-stats-2">
+                            {#<span class="sparkline success"></span>#}
+                            <span>
+                                <img src="{{ asset('images/my_money.png') }}" width="32">
+                            </span>
+                            <span class="txt">
+                                <span class="count">{{ all_withdraw }}$</span>
+                                <br>
+                                &nbsp;&nbsp;&nbsp;{{ 'dashboard.count_withdraw'|trans }}&nbsp;&nbsp;&nbsp;
+                            </span>
+                            <div class="clearfix"></div>
+                        </a>
+                        <!-- // Stats Widget END -->
+
+                    </div>
+                    <div class="span4">
+
+                        <!-- Stats Widget -->
+                        <a href="{{ path('marketing_statistic') }}" class="widget-stats widget-stats-2">
+                            {#<span class="sparkline success"></span>#}
+                            <span>
+                                <img src="{{ asset('images/ref_bonus.png') }}" width="32">
+                            </span>
+                            <span class="txt">
+                                <span class="count">{{ points_bonus }}$</span>
+                                <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;{{ 'dashboard.points_bonus'|trans }}&nbsp;&nbsp;&nbsp;&nbsp;
+                            </span>
+                            <div class="clearfix"></div>
+                        </a>
+                        <!-- // Stats Widget END -->
+
+                    </div>
+                    <div class="span4">
+
+                        <!-- Stats Widget -->
+                        <a href="" class="widget-stats widget-stats-2" style="cursor: default; pointer-events: none;">
+                            {#<span class="sparkline success"></span>#}
+                            <span>
+                                <img src="{{ asset('images/xclock.png') }}" width="32">
+                            </span>
+                            <span class="txt">
+                                <span class="count">{{ server_time|date('H:i:s') }}</span>
+                                <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;{{ 'dashboard.time_server'|trans }}&nbsp;&nbsp;&nbsp;&nbsp;
+                            </span>
+                            <div class="clearfix"></div>
+                        </a>
+                        <!-- // Stats Widget END -->
+
+                    </div>
+                </div>
+                <!-- // Row END -->
+
+            </div>
+            <!-- // Inner END -->
+
+        </div>
+    </div>
+    <div class="separator bottom"></div>
+    <div class="innerLR">
+
+        <div class="row-fluid">
+            <div class="span6">
+
+                <div class="widget widget-activity margin-none" data-toggle="collapse-widget">
+                    <div class="widget-head">
+                        <h4 class="heading">{{ 'dashboard.tickets_support'|trans }}</h4>
+                    </div>
+                    <div class="widget-body">
+
+                        <div class="innerB">
+                            <ul class="tabs">
+                                {#<li class="glyphicons user_add"><span data-toggle="tab" data-target="#filterUsersTab"><i></i></span></li>#}
+                                {#<li class="glyphicons shopping_cart"><span data-toggle="tab" data-target="#filterOrdersTab"><i></i></span></li>#}
+                                <li class="glyphicons envelope active"><span data-toggle="tab" data-target="#filterMessagesTab"><i></i></span></li>
+                                {#<li class="glyphicons link"><span data-toggle="tab" data-target="#filterLinksTab"><i></i></span></li>#}
+                                {#<li class="glyphicons camera"><span data-toggle="tab" data-target="#filterPhotosTab"><i></i></span></li>#}
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="tab-content">
+
+
+                            <!-- Filter Users Tab -->
+                            {#<div class="tab-pane" id="filterUsersTab">#}
+                                {#<ul class="list">#}
+
+                                    {#<!-- Activity item -->#}
+                                    {#<li>#}
+                                        {#<span class="date">21/03</span>#}
+                                        {#<span class="glyphicons activity-icon user_add"><i></i></span>#}
+                                        {#<span class="ellipsis"><a href="">Darius Jackson</a> registered at <a href="">Melisa Ragae's</a> suggestion.</span>#}
+                                        {#<div class="clearfix"></div>#}
+                                    {#</li>#}
+                                    {#<!-- // Activity item END -->#}
+                                    {#<!-- Activity item -->#}
+                                    {#<li>#}
+                                        {#<span class="date">21/03</span>#}
+                                        {#<span class="glyphicons activity-icon user_add"><i></i></span>#}
+                                        {#<span class="ellipsis"><a href="">Jane Doe</a> registered at <a href="">John Doe's</a> suggestion.</span>#}
+                                        {#<div class="clearfix"></div>#}
+                                    {#</li>#}
+                                    {#<!-- // Activity item END -->#}
+                                    {#<!-- Activity item -->#}
+                                    {#<li>#}
+                                        {#<span class="date">21/03</span>#}
+                                        {#<span class="glyphicons activity-icon user_add"><i></i></span>#}
+                                        {#<span class="ellipsis"><a href="">Melisa Ragae</a> registered at <a href="">John Doe's</a> suggestion.</span>#}
+                                        {#<div class="clearfix"></div>#}
+                                    {#</li>#}
+                                    {#<!-- // Activity item END -->#}
+                                    {#<!-- Activity item -->#}
+                                    {#<li>#}
+                                        {#<span class="date">21/03</span>#}
+                                        {#<span class="glyphicons activity-icon user_add"><i></i></span>#}
+                                        {#<span class="ellipsis"><a href="">Martin Glades</a> registered at <a href="">John Doe's</a> suggestion.</span>#}
+                                        {#<div class="clearfix"></div>#}
+                                    {#</li>#}
+                                    {#<!-- // Activity item END -->#}
+
+                                {#</ul>#}
+                                {#<button type="button" class="btn btn-small btn-inverse view-all hidden-phone"><span class="hidden-phone hidden-tablet">View </span>members</button>#}
+                            {#</div>#}
+                            <!-- // Filter Users Tab END -->
+
+                            <!-- Filter Orders Tab -->
+                            {#<div class="tab-pane" id="filterOrdersTab">#}
+                                {#<ul class="list">#}
+
+                                    {#<!-- Activity item -->#}
+                                    {#<li>#}
+                                        {#<span class="date">21/03</span>#}
+                                        {#<span class="glyphicons activity-icon shopping_cart"><i></i></span>#}
+                                        {#<span class="ellipsis"><a href="">Jane Doe</a> bought 10 items worth of &euro;50 (<a href="">order #2301</a>)</span>#}
+                                        {#<div class="clearfix"></div>#}
+                                    {#</li>#}
+                                    {#<!-- // Activity item END -->#}
+                                    {#<!-- Activity item -->#}
+                                    {#<li>#}
+                                        {#<span class="date">21/03</span>#}
+                                        {#<span class="glyphicons activity-icon shopping_cart"><i></i></span>#}
+                                        {#<span class="ellipsis"><a href="">John Doe</a> bought 10 items worth of &euro;50 (<a href="">order #2302</a>)</span>#}
+                                        {#<div class="clearfix"></div>#}
+                                    {#</li>#}
+                                    {#<!-- // Activity item END -->#}
+                                    {#<!-- Activity item -->#}
+                                    {#<li>#}
+                                        {#<span class="date">21/03</span>#}
+                                        {#<span class="glyphicons activity-icon shopping_cart"><i></i></span>#}
+                                        {#<span class="ellipsis"><a href="">Melisa Ragae</a> bought 10 items worth of &euro;50 (<a href="">order #2303</a>)</span>#}
+                                        {#<div class="clearfix"></div>#}
+                                    {#</li>#}
+                                    {#<!-- // Activity item END -->#}
+                                    {#<!-- Activity item -->#}
+                                    {#<li>#}
+                                        {#<span class="date">21/03</span>#}
+                                        {#<span class="glyphicons activity-icon shopping_cart"><i></i></span>#}
+                                        {#<span class="ellipsis"><a href="">John Doe</a> bought 10 items worth of &euro;50 (<a href="">order #2304</a>)</span>#}
+                                        {#<div class="clearfix"></div>#}
+                                    {#</li>#}
+                                    {#<!-- // Activity item END -->#}
+
+                                {#</ul>#}
+                                {#<button type="button" class="btn btn-small btn-inverse view-all hidden-phone"><span class="hidden-phone hidden-tablet">View </span>orders</button>#}
+                            {#</div>#}
+                            <!-- // Filter Orders Tab END -->
+
+                            <!-- Filter Messages Tab -->
+                            <div class="tab-pane active" id="filterMessagesTab">
+                                <ul class="list">
+                                    {% set tickets = app.user.supportTickets %}
+                                    {% for ticket in tickets %}
+                                        <!-- Activity item -->
+                                        <a href="{{ path('office_support_view_ticket', {'id': ticket.id}) }}">
+                                            <li class="double">
+                                                <span class="glyphicons activity-icon envelope"><i></i></span>
+                                                <span class="ellipsis">
+                                                    {{ ticket.subject }}
+                                                    {#<span class="meta glyphicons calendar single"><i></i> 29 March, 2013 <span>status</span></span>#}
+                                                    <span class="meta glyphicons calendar single"><i></i> {{ ticket.dateSubmitted|date('d M, Y h:i') }}
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;{{ 'support.status'|trans }}:
+                                                        {% if ticket.status == 0 %}
+                                                            <span style="color: #00aa00"> {{ 'support.open'|trans }} </span>
+                                                        {% elseif ticket.status == 1 %}
+                                                            <span style="color: #00aa00"> {{ 'support.answered'|trans }} </span>
+                                                        {% elseif ticket.status == 2 %}
+                                                            <span style="color: #00aa00"> {{ 'support.awaiting_reply'|trans }} </span>
+                                                        {% elseif ticket.status == 3 %}
+                                                            <span style="color: #00aa00"> {{ 'support.closed'|trans }} </span>
+                                                        {% endif %}
+                                                    </span>
+                                                </span>
+                                                <div class="clearfix"></div>
+                                            </li>
+                                        </a>
+                                        <!-- // Activity item END -->
+                                    {% endfor %}
+
+                                    {#<!-- Activity item -->#}
+                                    {#<li class="double highlight">#}
+                                        {#<span class="glyphicons activity-icon envelope"><i></i></span>#}
+								{#<span class="ellipsis">#}
+									{#You have received an email from <a href="">John Doe</a> (john.doe@fake-email.net)#}
+									{#<span class="meta glyphicons calendar single"><i></i> on 29 March, 2013 <span>1 hour ago</span></span>#}
+								{#</span>#}
+                                        {#<div class="clearfix"></div>#}
+                                    {#</li>#}
+                                    {#<!-- // Activity item END -->#}
+
+                                    <!-- Activity item -->
+                                    {#<li class="double">#}
+                                        {#<span class="glyphicons activity-icon envelope"><i></i></span>#}
+								{#<span class="ellipsis">#}
+									{#You have received an email from <a href="">Melisa Ragae</a> (melisa.ragae@grr-email.net)#}
+									{#<span class="meta glyphicons calendar single"><i></i> on 29 March, 2013 <span>1 hour ago</span></span>#}
+								{#</span>#}
+                                        {#<div class="clearfix"></div>#}
+                                    {#</li>#}
+                                    {#<!-- // Activity item END -->#}
+                                    {#<!-- Activity item -->#}
+                                    {#<li class="double">#}
+                                        {#<span class="glyphicons activity-icon envelope"><i></i></span>#}
+								{#<span class="ellipsis">#}
+									{#You have received an email from <a href="">Melisa Ragae</a> (melisa.ragae@grr-email.net)#}
+									{#<span class="meta glyphicons calendar single"><i></i> on 29 March, 2013 <span>1 hour ago</span></span>#}
+								{#</span>#}
+                                        {#<div class="clearfix"></div>#}
+                                    {#</li>#}
+                                    <!-- // Activity item END -->
+
+                                </ul>
+                                <a href="{{ path('office_new_ticket') }}">
+                                    <button type="button" class="btn btn-small btn-inverse view-all hidden-phone">{{ 'dashboard.new_ticket'|trans }}</button>
+                                </a>
+                            </div>
+                            <!-- // Filter Messages Tab END -->
+
+                            <!-- Filter Links Tab -->
+                            {#<div class="tab-pane" id="filterLinksTab">#}
+                                {#<ul class="list">#}
+
+                                    {#<!-- Activity item -->#}
+                                    {#<li>#}
+                                        {#<span class="date">21/03</span>#}
+                                        {#<span class="glyphicons activity-icon link"><i></i></span>#}
+                                        {#<span class="ellipsis"><a href="">Melisa Ragae</a> bought 10 items worth of &euro;50 (<a href="">order #2301</a>)</span>#}
+                                        {#<div class="clearfix"></div>#}
+                                    {#</li>#}
+                                    {#<!-- // Activity item END -->#}
+                                    {#<!-- Activity item -->#}
+                                    {#<li>#}
+                                        {#<span class="date">21/03</span>#}
+                                        {#<span class="glyphicons activity-icon link"><i></i></span>#}
+                                        {#<span class="ellipsis"><a href="">John Doe</a> bought 10 items worth of &euro;50 (<a href="">order #2302</a>)</span>#}
+                                        {#<div class="clearfix"></div>#}
+                                    {#</li>#}
+                                    {#<!-- // Activity item END -->#}
+                                    {#<!-- Activity item -->#}
+                                    {#<li>#}
+                                        {#<span class="date">21/03</span>#}
+                                        {#<span class="glyphicons activity-icon link"><i></i></span>#}
+                                        {#<span class="ellipsis"><a href="">John Doe</a> bought 10 items worth of &euro;50 (<a href="">order #2303</a>)</span>#}
+                                        {#<div class="clearfix"></div>#}
+                                    {#</li>#}
+                                    {#<!-- // Activity item END -->#}
+                                    {#<!-- Activity item -->#}
+                                    {#<li>#}
+                                        {#<span class="date">21/03</span>#}
+                                        {#<span class="glyphicons activity-icon link"><i></i></span>#}
+                                        {#<span class="ellipsis"><a href="">Martin Glades</a> bought 10 items worth of &euro;50 (<a href="">order #2304</a>)</span>#}
+                                        {#<div class="clearfix"></div>#}
+                                    {#</li>#}
+                                    {#<!-- // Activity item END -->#}
+
+                                {#</ul>#}
+                                {#<button type="button" class="btn btn-small btn-inverse view-all hidden-phone"><span class="hidden-phone hidden-tablet">View </span>referrals</button>#}
+                            {#</div>#}
+                            <!-- // Filter Links Tab END -->
+
+                            <!-- Filter Photos Tab -->
+                            {#<div class="tab-pane" id="filterPhotosTab">#}
+                                {#<ul class="list">#}
+
+                                    {#<!-- Activity item -->#}
+                                    {#<li>#}
+                                        {#<span class="date">21/03</span>#}
+                                        {#<span class="glyphicons activity-icon camera"><i></i></span>#}
+                                        {#<span class="ellipsis"><a href="">Jane Doe</a> bought 10 items worth of &euro;50 (<a href="">order #2301</a>)</span>#}
+                                        {#<div class="clearfix"></div>#}
+                                    {#</li>#}
+                                    {#<!-- // Activity item END -->#}
+                                    {#<!-- Activity item -->#}
+                                    {#<li>#}
+                                        {#<span class="date">21/03</span>#}
+                                        {#<span class="glyphicons activity-icon camera"><i></i></span>#}
+                                        {#<span class="ellipsis"><a href="">Melisa Ragae</a> bought 10 items worth of &euro;50 (<a href="">order #2302</a>)</span>#}
+                                        {#<div class="clearfix"></div>#}
+                                    {#</li>#}
+                                    {#<!-- // Activity item END -->#}
+                                    {#<!-- Activity item -->#}
+                                    {#<li>#}
+                                        {#<span class="date">21/03</span>#}
+                                        {#<span class="glyphicons activity-icon camera"><i></i></span>#}
+                                        {#<span class="ellipsis"><a href="">Jane Doe</a> bought 10 items worth of &euro;50 (<a href="">order #2303</a>)</span>#}
+                                        {#<div class="clearfix"></div>#}
+                                    {#</li>#}
+                                    {#<!-- // Activity item END -->#}
+                                    {#<!-- Activity item -->#}
+                                    {#<li>#}
+                                        {#<span class="date">21/03</span>#}
+                                        {#<span class="glyphicons activity-icon camera"><i></i></span>#}
+                                        {#<span class="ellipsis"><a href="">John Doe</a> bought 10 items worth of &euro;50 (<a href="">order #2304</a>)</span>#}
+                                        {#<div class="clearfix"></div>#}
+                                    {#</li>#}
+                                    {#<!-- // Activity item END -->#}
+
+                                {#</ul>#}
+                                {#<button type="button" class="btn btn-small btn-inverse view-all hidden-phone"><span class="hidden-phone hidden-tablet">View </span>photos</button>#}
+                            {#</div>#}
+                            <!-- // Filter Photos Tab END -->
+
+                        </div>
+                        {#<div class="separator bottom"></div>#}
+
+                        {#<button type="button" class="btn btn-default">Default</button>#}
+                        {#<button type="button" class="btn btn-primary">Primary</button>#}
+                        {#<button type="button" class="btn btn-success hidden-phone">Success</button>#}
+                        {#<button type="button" class="btn btn-warning hidden-phone">Warning</button>#}
+                        {#<button type="button" class="btn btn-danger hidden-phone">Danger</button>#}
+                    </div>
+                </div>
+
+            </div>
+            <div class="span6">
+
+                <!-- Traffic Sources Pie Chart -->
+                <div class="widget" data-toggle="collapse-widget" data-collapse-closed="false">
+                    <div class="widget-head">
+                        <h4 class="heading glyphicons pie_chart"><i></i>{{ 'dashboard.chart_buy_sell'|trans }}</h4>
+                    </div>
+                    <div class="widget-body">
+                        <div id="pies" style="height: 221px;"></div>
+                    </div>
+                </div>
+                <!-- // Traffic Sources Pie Chart END -->
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <script src="{{ asset('lib/argo/common/theme/scripts/demo/charts.helper.js') }}"></script>
+    <script type="text/javascript">
+        var data1 = [
+            {% for stat in statistics %}
+                [{{ loop.index }}, {{ stat.maxCourse }}],
+            {% endfor %}
+        ];
+        var date = [
+            {% for stat in statistics %}
+                [{{ loop.index }}, "{{ stat.date|date('d/m') }}"],
+            {% endfor %}
+        ];
+        $.plot($("#chart_lines_fill_nopoints"),
+                [{
+                    label: "{{ 'dashboard.max_cource'|trans }}",
+                    data: data1
+                }],
+                {
+                    series: {
+                        lines: {
+                            show: true
+                        },
+                        points: {
+                            show: true
+                        }
+                    },
+                    grid: {
+                        hoverable: true,
+                        clickable: false
+                    },
+//                    yaxis: { max: 600},
+                    xaxis: {ticks: date},
+                    tooltip: true,
+                    tooltipOpts: {
+                        content: "%s : %y.0",
+                        shifts: {
+                            x: -30,
+                            y: -50
+                        },
+                        defaultTheme: false
+                    }
+                }
+        );
+    </script>
+
+    <script type="text/javascript">
+        $.plot($("#pies"),
+                [
+                    { label: "{{ 'dashboard.buying'|trans }}",  data: {{ buy_percent }} },
+                    { label: "{{ 'dashboard.selling'|trans }}",  data: {{ sell_percent }} }
+                ],
+                {
+                    series: {
+                        pie: {
+                            show: true,
+                            redraw: true,
+                            radius: 1,
+                            tilt: 0.6,
+                            label: {
+                                show: true,
+                                radius: 1,
+                                formatter: function(label, series){
+                                    return '<div style="font-size:8pt;text-align:center;padding:5px;color:#fff;">'+Math.round(series.percent)+'%</div>';
+                                },
+                                background: { opacity: 0.8 }
+                            }
+                        }
+                    },
+                    legend: { show: true, backgroundColor: null, backgroundOpacity: 0 },
+                    colors: [],
+                    grid: { hoverable: true },
+                    tooltip: true,
+                    tooltipOpts: {
+                        content: "<strong>%y% %s</strong>",
+                        dateFormat: "%y-%0m-%0d",
+                        shifts: {
+                            x: 10,
+                            y: 20
+                        },
+                        defaultTheme: false
+                    }
+                }
+        );
+    </script>
+
+    <script type="text/javascript" src="{{ asset('js/jquery.liquidcarousel.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.liquid').liquidcarousel({
+                height: 150,		//the height of the list
+                duration: 100		//the duration of the animation
+//                hidearrows: true	//hide arrows if all of the list items are visible
+            });
+        });
+    </script>
+    {#<code><script src="{{ asset('lib/mediaelement/jquery.js') }}"></script>#}
+    <script src="{{ asset('lib/mediaelement/mediaelement-and-player.min.js') }}"></script>
+    <script>
+        // using jQuery
+        $('video,audio').mediaelementplayer(/* Options */);
+    </script>
+{% endblock js %}

@@ -1,0 +1,352 @@
+{#<html>#}
+{#<head></head>#}
+{#<body>#}
+{#{% block body %}{% endblock body %}#}
+{#</body>#}
+{#</html>#}
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Ethereumpro Exchange" />
+    <meta name="keywords" content="ethereum,exchange,mlm,network,business,marketing,earn,crypto,cryptocurrency,bitcoin"/>
+    <meta name="author" content="Ethereumpro.org" />
+    <title>Ethereumpro Exchange</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+    <!--Fav and touch icons-->
+    <link rel="shortcut icon" href="{{ asset('lib/megabiz/img/icons/favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('lib/megabiz/img/icons/apple-touch-icon.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('lib/megabiz/img/icons/apple-touch-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('lib/megabiz/img/icons/apple-touch-icon-114x114.png') }}">
+
+    <!--google web font-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700' rel='stylesheet' type='text/css'>
+
+    <!--style sheets-->
+    <link rel="stylesheet" media="screen" href="{{ asset('lib/megabiz/css/bootstrap.css') }}"/>
+    <link rel="stylesheet" media="screen" href="{{ asset('lib/megabiz/css/bootstrap-responsive.css') }}"/>
+    <link rel="stylesheet" media="screen" href="{{ asset('lib/megabiz/css/style.css') }}"/>
+    <link rel="stylesheet" media="screen" href="{{ asset('lib/megabiz/css/flexslider.css') }}"/>
+    <link rel="stylesheet" media="screen" href="{{ asset('lib/megabiz/css/prettyPhoto.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('lib/megabiz/rs-plugin/css/settings.css') }}" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('lib/megabiz/css/fullwidth.css') }}" media="screen"/>
+
+    <!--main jquery libraries / others are at the bottom-->
+    <script src="{{ asset('lib/megabiz/js/jquery-1.9.1.min.js') }}" type="text/javascript" ></script>
+    <script src="{{ asset('lib/megabiz/js/modernizr.js') }}" type="text/javascript"></script>
+    {% block style %}
+    {% endblock style %}
+</head>
+<body>
+<!-- header section starts
+================================================== -->
+<section id="header">
+    <div class="container clearfix">
+        <div class="row">
+
+            <!--logo starts-->
+            <div class="span4 pos-rel">
+                <a href="{{ path('home_index') }}">
+                    <img src="{{ asset('lib/megabiz/img/logo.png') }}" width="210" height="78" alt="logo">
+                </a>
+                <div class="logo-info"></div>
+            </div>
+            <!--logo ends-->
+
+            <!--social starts-->
+            <div class="span8">
+                <div style="position: absolute; margin-top: 24px; margin-left: 15%">
+                    <span>
+                        <a href="{{ path('change_locale', {'locale': 'en'}) }}">
+                            <img src="{{ asset('lib/argo/common/theme/images/lang/en.png') }}">
+                        </a>
+                    </span>
+                    <span style="margin-left: 20px">
+                        <a href="{{ path('change_locale', {'locale': 'ru'}) }}">
+                            <img src="{{ asset('lib/argo/common/theme/images/lang/ru.png') }}" width="22">
+                        </a>
+                    </span>
+                </div>
+                <ul class="social">
+
+                    <li class="">
+                        <a href="{{ path('fos_user_security_login') }}">
+                            {#<img src="{{ asset('lib/megabiz/img/icons/icon-twitter.png') }}" alt="icon">#}
+                            {{ 'layout.login'|trans({}, 'FOSUserBundle') }}
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{{ path('fos_user_registration_register') }}">
+                            {#<img src="{{ asset('lib/megabiz/img/icons/icon-facebook.png') }}" alt="icon">#}
+                            {{ 'home.registration.registration'|trans }}
+                        </a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <!--social ends-->
+
+            <!--menu starts-->
+            <div class="span12">
+                <div class="menu-wrapper">
+                    <div id="smoothmenu" class="ddsmoothmenu">
+                        <ul>
+                            <li><a href="{{ path('home_index') }}" class="
+                                {% if app.request.attributes.get('_route') == 'home_index' %}
+                                selected
+                                {% endif %}
+                                ">
+                                    {{ 'home.home'|trans }}
+                                </a>
+                            </li>
+                            <li><a href="{{ path('home_about') }}" class="
+                                {% if app.request.attributes.get('_route') == 'home_about' %}
+                                    selected
+                                {% endif %}
+                                ">
+                                    {{ 'home.about'|trans }}
+                                </a>
+                            </li>
+                            <li><a href="{{ path('home_services') }}" class="
+                                {% if app.request.attributes.get('_route') == 'home_services' %}
+                                    selected
+                                {% endif %}
+                                ">
+                                    {{ 'home.services'|trans }}
+                                </a>
+                            </li>
+                            <li><a href="{{ path('home_pages') }}" class="
+                                {% if app.request.attributes.get('_route') == 'home_pages' %}
+                                    selected
+                                {% endif %}
+                                ">
+                                    {{ 'home.pages'|trans }}
+                                </a>
+
+                            </li>
+                            <li><a href="{{ path('home_blog') }}" class="
+                                {% if app.request.attributes.get('_route') == 'home_blog' %}
+                                    selected
+                                {% endif %}
+                                ">
+                                    {{ 'home.blog'|trans }}
+                                </a>
+
+                            </li>
+                            <li><a href="{{ path('affiliate_program') }}" class="
+                                {% if app.request.attributes.get('_route') == 'affiliate_program' %}
+                                    selected
+                                {% endif %}
+                                ">
+                                    {{ 'home.affiliate_program'|trans }}
+                                </a>
+
+                            </li>
+                            <li><a href="{{ path('mining_pool') }}" class="
+                                {% if app.request.attributes.get('_route') == 'mining_pool' %}
+                                    selected
+                                {% endif %}
+                                ">
+                                    {{ 'home.mining_pool'|trans }}
+                                </a>
+
+                            </li>
+                            <li><a href="{{ path('home_contact') }}" class="
+                                {% if app.request.attributes.get('_route') == 'home_contact' %}
+                                    selected
+                                {% endif %}
+                                ">
+                                    {{ 'home.contact'|trans }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    {#<ul class="inline-right">#}
+                        {#<li><img src="{{ asset('lib/megabiz/img/icons/icon-mail.png') }}" alt="icon"> admin@ethereumpro.org</li>#}
+                    {#</ul>#}
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <!--menu ends-->
+
+        </div>
+    </div>
+</section>
+<!-- header section ends
+================================================== -->
+
+{% block body %}
+
+{% endblock body %}
+
+<!-- footer starts
+================================================== -->
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+
+            <!--first column starts-->
+            <div class="span9">
+
+                <!--row for nested columns starts-->
+                <div class="row">
+
+                    <!--first nested column starts-->
+                    <div class="span3">
+                        <h5>About Ethereumpro.org</h5>
+                        <p>Ethereumpro.org is unique Ethereum exchange platform that provides an online tool that allows users to freely trade Ethereum.</p>
+                    </div>
+
+                    <!--second nested column starts-->
+                    <div class="span3">
+                        <h5>Affiliate program</h5>
+                        <div id="twitter"></div>
+                        <a href="https://ethereumpro.org/register/">To learn all benefits of affiliate program, please Sign up.</a></div>
+
+                    <!--third nested column starts-->
+                    <div class="span3">
+                        <h5>Menu</h5>
+                        <ul class="list-arrow">
+                            <li><a href="{{ path('home_about') }}">About</a></li>
+                            <li><a href="{{ path('home_services') }}">Founders</a></li>
+                            <li><a href="{{ path('home_pages') }}">Mining</a></li>
+                            <li><a href="{{ path('home_blog') }}">Video Gallery</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!--row for nested columns ends-->
+
+                <!--divider here-->
+                <div class="divider-dark"></div>
+                <p class="pull-left"><img src="{{ asset('lib/megabiz/img/footer-logo.png') }}" alt="footer-logo" style="margin-right: 10px;">© Copyright 2016 Ethereumpro.org. All Rights Reserved.</p>
+                <ul class="copyright inline-right">
+                    <li><a href="{{ path('home_terms_and_conditions') }}">Terms & Conditions</a></li>
+                    <li><a href="{{ path('home_privacy') }}">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <!--first column ends-->
+
+            <!--second column starts-->
+            <div class="span3 pos-rel">
+
+                <!--tooltip-->
+                <div class="mytooltip">Get In Touch
+                    <div class="arrow-left"></div>
+                </div>
+
+                <!--box-dark starts-->
+                <div class="box-dark"> <img src="{{ asset('lib/megabiz/img/preview/footer-map.png') }}" alt="map">
+                    <div class="spacer-20px"></div>
+                    <a href="https://ethereumpro.org/contact" class="mybtn">Contact us</a> </div>
+                <!--box-dark ends-->
+
+            </div>
+            <!--second column ends-->
+
+        </div>
+    </div>
+</footer>
+<!-- footer ends
+================================================== -->
+
+<!-- scripts starts
+================================================== -->
+<!-- Revolution slider scripts starts -->
+<script type="text/javascript" src="{{ asset('lib/megabiz/rs-plugin/js/jquery.themepunch.plugins.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('lib/megabiz/rs-plugin/js/jquery.themepunch.revolution.min.js') }}"></script>
+<script type="text/javascript">
+    //	var tpj=jQuery;
+    //	tpj.noConflict();
+    //<![CDATA[
+    $(document).ready(function () {
+        var api = $('.fullwidthbanner').revolution({
+            delay: 9000,
+            startwidth: 1170,
+            startheight: 500,
+            onHoverStop: "on", // Stop Banner Timet at Hover on Slide on/off
+            thumbWidth: 100, // Thumb With and Height and Amount (only if navigation Tyope set to thumb !)
+            thumbHeight: 50,
+            thumbAmount: 3,
+            hideThumbs: 1,
+            navigationType: "none", // bullet, thumb, none
+            navigationArrows: "solo", // nexttobullets, solo (old name verticalcentered), none
+            navigationStyle: "round", // round,square,navbar,round-old,square-old,navbar-old, or any from the list in the docu (choose between 50+ different item), custom
+            navigationHAlign: "left", // Vertical Align top,center,bottom
+            navigationVAlign: "bottom", // Horizontal Align left,center,right
+            navigationHOffset: 30,
+            navigationVOffset: 30,
+            soloArrowLeftHalign: "left",
+            soloArrowLeftValign: "center",
+            soloArrowLeftHOffset: 20,
+            soloArrowLeftVOffset: 0,
+            soloArrowRightHalign: "right",
+            soloArrowRightValign: "center",
+            soloArrowRightHOffset: 20,
+            soloArrowRightVOffset: 0,
+            touchenabled: "on", // Enable Swipe Function : on/off
+            stopAtSlide: -1, // Stop Timer if Slide "x" has been Reached. If stopAfterLoops set to 0, then it stops already in the first Loop at slide X which defined. -1 means do not stop at any slide. stopAfterLoops has no sinn in this case.
+            stopAfterLoops: -1, // Stop Timer if All slides has been played "x" times. IT will stop at THe slide which is defined via stopAtSlide:x, if set to -1 slide never stop automatic
+            hideCaptionAtLimit: 0, // It Defines if a caption should be shown under a Screen Resolution ( Basod on The Width of Browser)
+            hideAllCaptionAtLilmit: 0, // Hide all The Captions if Width of Browser is less then this value
+            hideSliderAtLimit: 0, // Hide the whole slider, and stop also functions if Width of Browser is less than this value
+            fullWidth: "on",
+            shadow: 0 //0 = no Shadow, 1,2,3 = 3 Different Art of Shadows -  (No Shadow in Fullwidth Version !)
+        });
+    });
+    //]]
+</script>
+<!-- Revolution slider scripts ends -->
+
+<!--other jqueries required-->
+<script src="{{ asset('lib/megabiz/js/bootstrap.js') }}" type="text/javascript" ></script>
+<script src="{{ asset('lib/megabiz/js/jquery.flexslider-min.js') }}" type="text/javascript" ></script>
+<script src="{{ asset('lib/megabiz/js/jquery.prettyPhoto.js') }}" type="text/javascript"></script>
+<script src="{{ asset('lib/megabiz/js/twitter.js') }}" type="text/javascript"></script>
+<script src="{{ asset('lib/megabiz/js/ddsmoothmenu.js') }}" type="text/javascript"></script>
+<script src="{{ asset('lib/megabiz/js/custom.js') }}" type="text/javascript"></script>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-74349088-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+<!-- Start Alexa Certify Javascript -->
+<script type="text/javascript">
+_atrk_opts = { atrk_acct:"Gn/Um1aMp4Z34B", domain:"ethereumpro.org",dynamic: true};
+(function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
+</script>
+<noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=Gn/Um1aMp4Z34B" style="display:none" height="1" width="1" alt="" /></noscript>
+<!-- End Alexa Certify Javascript -->  
+
+{#<img src="{{ asset('images/maintenance-page.png') }}">#}
+
+{#<!-- Start Alexa Certify Javascript -->#}
+{#<script type="text/javascript">#}
+{#_atrk_opts = { atrk_acct:"Gn/Um1aMp4Z34B", domain:"ethereumpro.org",dynamic: true};#}
+{#(function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();#}
+{#</script>#}
+{#<noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=Gn/Um1aMp4Z34B" style="display:none" height="1" width="1" alt="" /></noscript>#}
+{#&#123;&#35;<!-- End Alexa Certify Javascript -->  &#35;&#125;#}
+
+
+
+
+{#<script>#}
+  {#(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){#}
+  {#(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),#}
+  {#m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)#}
+  {#})(window,document,'script','//www.google-analytics.com/analytics.js','ga');#}
+
+  {#ga('create', 'UA-74349088-1', 'auto');#}
+  {#ga('send', 'pageview');#}
+
+{#</script>#}
+
+</body>
+</html>

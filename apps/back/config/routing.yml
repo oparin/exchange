@@ -1,0 +1,52 @@
+admin_mining:
+    resource: "@AdminMiningBundle/Controller/"
+    type:     annotation
+    prefix:   /mining
+
+admin_static_page:
+    resource: "@AdminStaticPageBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+admin_wallet:
+    resource: "@AdminWalletBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+admin_arbitrage:
+    resource: "@AdminArbitrageBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+admin_marketing:
+    resource: "@AdminMarketingBundle/Controller/"
+    type:     annotation
+    prefix:   /marketing
+
+admin_news:
+    resource: "@AdminNewsBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+admin_support:
+    resource: "@AdminSupportBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+admin_settings:
+    resource: "@AdminSettingsBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+admin_member:
+    resource: "@AdminMemberBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+admin_user:
+    resource: "@AdminUserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"

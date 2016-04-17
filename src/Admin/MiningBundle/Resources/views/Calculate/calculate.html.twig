@@ -1,0 +1,36 @@
+{% extends '::base.html.twig' %}
+
+{#{% form_theme form '::twig_theme.html.twig' %}#}
+
+{% block title_content %}<i class="fa fa-usd"></i>&nbsp; Майнинг Пересчитать{% endblock title_content %}
+
+{% block content %}
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        {% include '::alert_succes.html.twig' with {'text' : flashMessage} %}
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        {% include '::alert_error.html.twig' with {'text' : flashMessage} %}
+    {% endfor %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box">
+                <header>
+                    <div class="icons">
+                        <i class="fa fa-edit"></i>
+                    </div>
+                    <h5>Пересчитать</h5>
+                </header>
+                <div id="collapse4" class="body" style="height: 70px">
+                    <form action="" method="post">
+                        <div class="form-group">
+                            <div class="control-label col-lg-3"></div>
+                            <div style="float: right" class="col-lg-9">
+                                <input type="submit" value="Пересчитать" class="btn btn-metis-6 btn-sm">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

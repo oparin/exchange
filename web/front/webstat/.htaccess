@@ -1,0 +1,7 @@
+AuthType Basic
+AuthName "/www/web/front/webstat"
+AuthUserFile /home/vdsadmin/etc/131084.passwd
+DirectoryIndex index.html
+<Limit GET POST>
+	require valid-user
+</Limit>

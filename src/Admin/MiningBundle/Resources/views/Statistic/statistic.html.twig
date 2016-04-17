@@ -1,0 +1,53 @@
+{% extends '::base.html.twig' %}
+
+{% block title_content %}<i class="fa fa-usd"></i>&nbsp; Майнинг статистика{% endblock title_content %}
+
+{% block content %}
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        {% include '::alert_succes.html.twig' with {'text' : flashMessage} %}
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        {% include '::alert_error.html.twig' with {'text' : flashMessage} %}
+    {% endfor %}
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box">
+                <header>
+                    <div class="icons">
+                        <i class="fa fa-table"></i>
+                    </div>
+                    <h5>Суммарные средства</h5>
+                </header>
+                <div id="collapse4" class="body">
+                    <table class="table table-bordered table-condensed table-hover table-striped dataTable">
+                        <thead>
+                        <tr class="grid-row-titles">
+                            <th class="sorting " style="color: black;">ETH mining rights</th>
+                            <th class="sorting " style="color: black;">Mining rights in work</th>
+                            <th class="sorting " style="color: black;">Pool wallet</th>
+                            <th class="sorting " style="color: black;">Main account</th>
+                            <th class="sorting " style="color: black;">Main ETH account</th>
+                            <th class="sorting " style="color: black;">Main wallet</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ mining_rights }}</td>
+                                <td>{{ mining_rights_in_work }}</td>
+                                <td>{{ pool_wallet }}</td>
+                                <td>{{ main_account }}</td>
+                                <td>{{ main_eth_account }}</td>
+                                <td>{{ main_wallet }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+
+{% endblock js %}

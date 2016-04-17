@@ -1,0 +1,6 @@
+services:
+    user.transaction_listener:
+        class: StatisticBundle\EventListener\TransactionListener
+        arguments: [@doctrine.orm.default_entity_manager]
+        tags:
+            - { name: kernel.event_listener, event: 'user_transaction', method: 'transaction' }

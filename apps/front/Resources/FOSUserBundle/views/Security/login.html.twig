@@ -1,0 +1,76 @@
+{% extends ':home:base.html.twig' %}
+
+{% block body %}
+<!-- content-top starts
+================================================== -->
+    <div id="content-top">
+        <div id="content-top-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <h1>{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</h1>
+                        <ul class="breadcrumb">
+                            <li><a href="{{ path('home_index') }}">{{ 'home.home'|trans }}</a> <span class="divider">/</span></li>
+                            <li class="active">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- content-top ends
+
+<!-- content starts
+================================================== -->
+    <section id="content">
+        <div class="container">
+
+            <!--row (first) starts-->
+            <div class="row">
+
+                <!--first column starts-->
+                <div class="span6">
+                    <h3>{{ 'home.login.enter_username_and_password'|trans }}</h3>
+                    <p>
+                        {% if error %}
+                            <div style="color: red">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+                    </p>
+                    <form id="contactform" action="{{ path("fos_user_security_check") }}" method="post">
+                    <fieldset>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                        <p>
+                            <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="{{ 'home.login.username'|trans }}" />
+                        </p>
+                        <p>
+                            <input type="password" id="password" name="_password" required="required" placeholder="{{ 'form.password'|trans({}, 'FOSUserBundle') }}" />
+                        </p>
+                        <p>
+                            {#{{ form_widget(form.theme) }}#}
+                            <input type="checkbox" id="remember_me" name="_remember_me" value="on" style="float: left; margin-right: 20px;" />
+                            <div style="margin-top: 12px">
+                                <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+                            </div>
+                            <div style="position: absolute; margin-top: -26px; margin-left: 220px">
+                                <a href="{{ path('fos_user_resetting_request') }}">{{ 'home.login.forgot_password'|trans }}</a>
+                            </div>
+                        </p>
+                        <p>
+                            <input type="submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" class="submit"/>
+                        </p>
+                        <div id="result"></div>
+                    </fieldset>
+                    <form>
+                </div>
+                <!--first column ends-->
+
+                {% include(':home:second_column.html.twig') %}
+
+            </div>
+            <!--row (first) ends-->
+
+        </div>
+    </section>
+    <!-- content ends
+    ================================================== -->
+{% endblock body %}

@@ -1,0 +1,79 @@
+{% extends ':office:base.html.twig' %}
+
+{% block title %}{{ 'profile.my_profile'|trans }}{% endblock %}
+
+{% block title_content %}
+    {{ 'profile.my_profile'|trans }}
+{% endblock %}
+
+{% block content %}
+    <div class="innerLR">
+        <div class="row-fluid">
+            <!-- Column -->
+            <div class="span12">
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    {% include ':office:alert_success.html.twig' with {'message' : flashMessage} %}
+                {% endfor %}
+                {% for flashMessage in app.session.flashbag.get('error') %}
+                    {% include ':office:alert_error.html.twig' with {'message' : flashMessage} %}
+                {% endfor %}
+                <!-- Widget -->
+                <div class="widget">
+                    <!-- Widget heading -->
+                    <div class="widget-head">
+                        <h4 class="heading">{{ 'profile.my_profile'|trans }}</h4>
+                    </div>
+                    <!-- // Widget heading END -->
+
+                    <div class="widget-body">
+                        <form class="form-horizontal" action="" method="post" name="buying_form_type">
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <div class="well">
+                                        <!-- Group -->
+                                        <div class="control-group ">
+                                            <label class="control-label required" style="width: 160px; text-align: left">{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}</label>
+                                            <div class="controls">
+                                                <input type="text" class="span6" readonly="readonly" value="{{ user.username }}">
+                                            </div>
+                                        </div>
+                                        <!-- // Group END -->
+
+                                        <!-- Group -->
+                                        <div class="control-group ">
+                                            <label class="control-label required" style="width: 160px; text-align: left">{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}</label>
+                                            <div class="controls">
+                                                <input type="text" class="span6" readonly="readonly" value="{{ user.email }}">
+                                            </div>
+                                        </div>
+                                        <!-- // Group END -->
+
+                                        {% for account in app.user.withdraw %}
+                                            <!-- Group -->
+                                            <div class="control-group ">
+                                                <label class="control-label required" style="width: 160px; text-align: left">{{ account.type.name }}</label>
+                                                <div class="controls">
+                                                    <input type="text" class="span6" readonly="readonly" value="{{ account.account }}">
+                                                </div>
+                                            </div>
+                                            <!-- // Group END -->
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div style="margin-top: 10px" class="row-fluid">
+                                <div class="span5"></div>
+                                <div style="text-align: center" class="span2">
+                                    <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-success hidden-phone">{{ 'profile.change'|trans }}</a>
+                                </div>
+                                <div class="span5"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

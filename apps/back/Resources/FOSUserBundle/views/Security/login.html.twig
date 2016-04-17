@@ -1,0 +1,43 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <meta name="msapplication-TileColor" content="#5bc0de" />
+    <meta name="msapplication-TileImage" content="{{ asset('lib/metis/assets/img/metis-tile.png') }}" />
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css">
+
+    <!-- Metis core stylesheet -->
+    <link rel="stylesheet" href="{{ asset('lib/metis/assets/css/main.min.css') }}">
+</head>
+<body class="login">
+<div class="form-signin">
+    <div class="text-center">
+        <img src="{{ asset('lib/metis/assets/img/logo.png') }}" alt="Metis Logo">
+    </div>
+    <hr>
+    <div class="tab-content">
+        <div id="login" class="tab-pane active">
+            <form action="{{ path("fos_user_security_check") }}" method="post">
+                {% if error %}
+                    <p class="text-muted text-center" style="color: red">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+                {% endif %}
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                <input type="text" id="username" name="_username" placeholder="Username" class="form-control top" value="{{ last_username }}" required="required" />
+                <input type="password" id="password" name="_password" placeholder="Password" class="form-control bottom" required="required" />
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="remember_me" name="_remember_me" value="on" /> Remember Me
+                    </label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

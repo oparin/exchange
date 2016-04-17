@@ -1,0 +1,41 @@
+{% extends ':home:base.html.twig' %}
+
+
+{% block body %}
+<!-- content-top starts
+================================================== -->
+<div id="content-top">
+    <div id="content-top-inner">
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <h1>{{ 'home.registration.registration'|trans }}</h1>
+                    <ul class="breadcrumb">
+                        <li><a href="{{ path('home_index') }}">{{ 'home.home'|trans }}</a> <span class="divider">/</span></li>
+                        <li class="active">{{ 'home.registration.registration'|trans }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content-top ends
+
+<!-- content starts
+================================================== -->
+    <section id="content">
+        <div class="container">
+
+            <!--row (first) starts-->
+            <div class="row">
+
+                <!--first column starts-->
+                <div class="span6">
+                    <h3>{{ 'registration.check_email'|trans({'%email%': user.email}, 'FOSUserBundle') }}</h3>
+                </div>
+
+                {{ include(':home:second_column.html.twig') }}
+            </div>
+        </div>
+    </section>
+{% endblock body %}

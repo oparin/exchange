@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * Created by PhpStorm.
+ * User: kalyan
+ * Date: 11/13/15
+ * Time: 12:50 PM
+ */
+
+namespace UserBundle\Entity;
+
+use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Class User
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="users")
+ */
+class User extends BaseUser
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+    }
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="sponsor_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $sponsor;
+
+    /**
+     * @ORM\Column(type="string", name="register_ip", nullable=true)
+     */
+    protected $registerIp;
+
+    /**
+     * @ORM\Column(type="string", name="last_ip", nullable=true)
+     */
+    protected $lastIp;
+}

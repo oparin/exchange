@@ -1,0 +1,125 @@
+{% extends ':office:base.html.twig' %}
+
+{% block title %}{{ 'withdraw.withdraw'|trans }}{% endblock %}
+
+{% block title_content %}
+    {{ 'withdraw.withdraw'|trans }}
+{% endblock %}
+
+{% block content %}
+<div class="innerLR">
+    <div class="row-fluid">
+        <!-- Column -->
+        <div class="span12">
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                {% include ':office:alert_success.html.twig' with {'message' : flashMessage} %}
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('error') %}
+                {% include ':office:alert_error.html.twig' with {'message' : flashMessage} %}
+            {% endfor %}
+            <!-- Widget -->
+            <div class="widget">
+                <!-- Widget heading -->
+                <div class="widget-head">
+                    <h4 class="heading">
+                        {{ 'withdraw.withdraw_funds'|trans }}
+                    </h4>
+                </div>
+                <!-- // Widget heading END -->
+
+                <div class="widget-body" style="">
+                    {#<div class="alert" style="background-color: #FEFF9F; color: black; text-align: center; height: 20px">#}
+                        {#<div class="row-fluid">#}
+                            {#<div class="span6">#}
+                                {#<strong>M</strong> - {{ 'buy.main_account'|trans }}#}
+                            {#</div>#}
+                            {#<div class="span6">#}
+                                {#<strong>A</strong> - {{ 'buy.arbitrage_account'|trans }}#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</div>#}
+                    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <div class="well">
+                                {#<!-- Group -->#}
+                                {#<div class="control-group {% if form_errors(form.account) %}error{% endif %}">#}
+                                    {#{{ form_label(form.account, 'withdraw.account'|trans, {'label_attr': {'class': 'control-label'}}) }}#}
+                                    {#<div class="controls">#}
+                                        {#{{ form_widget(form.account, {'attr': {'class': 'span12'}}) }}#}
+                                        {#{% if form_errors(form.account) %}#}
+                                            {#<p class="error help-block">#}
+                                                {#<span class="label label-important">{{ form_errors(form.account) }}</span>#}
+                                            {#</p>#}
+                                        {#{% endif %}#}
+                                    {#</div>#}
+                                {#</div>#}
+                                {#<!-- // Group END -->#}
+
+                                <!-- Group -->
+                                <div class="control-group">
+                                    {{ form_label(form.sum, 'withdraw.sum'|trans, {'label_attr': {'class': 'control-label'}}) }}
+                                    <div class="controls">
+                                        {#<div style="width: 87%" class="input-append">#}
+                                            {{ form_widget(form.sum, {'attr': {'class': 'span12'}}) }}
+                                                {#<span style=" color: #262626; font-weight: bold" class="add-on">#}
+                                                     {#$#}
+                                                {#</span>#}
+                                            {% if form_errors(form.sum) %}
+                                                <p class="error help-block">
+                                                    <span class="label label-important">{{ form_errors(form.sum) }}</span>
+                                                </p>
+                                            {% endif %}
+                                        {#</div>#}
+                                    </div>
+                                </div>
+                                <!-- // Group END -->
+
+                                <!-- Group -->
+                                <div class="control-group {% if form_errors(form.type) %}error{% endif %}">
+                                    {{ form_label(form.type, 'withdraw.type'|trans, {'label_attr': {'class': 'control-label'}}) }}
+                                    <div class="controls">
+                                        {{ form_widget(form.type, {'attr': {'class': 'span12', 'required': 'required'}}) }}
+                                        {% if form_errors(form.type) %}
+                                            <p class="error help-block">
+                                                <span class="label label-important">{{ form_errors(form.type) }}</span>
+                                            </p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <!-- // Group END -->
+                            </div>
+                        </div>
+                        <div class="span6">
+                            <div class="well" style="height: 80px">
+                                <div class="control-group">
+                                    <label class="control-label required" style="width: 125px">
+                                        {{ 'withdraw.available_amount'|trans }}
+                                    </label>
+                                    <div class="controls">
+                                        <div style="width: 87%" class="input-append">
+                                            <input id="sum" type="text" class="span12" disabled readonly style="text-align: right" value="{{ max_sum }}">
+                                                <span style=" color: #262626; font-weight: bold" class="add-on">
+                                                     $
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{ form_rest(form) }}
+                    <div class="row-fluid" style="margin-top: 10px">
+                        <div class="span4"></div>
+                        <div class="span4" style="text-align: center">
+                            <button class="btn btn-success hidden-phone" type="submit">{{ 'withdraw.send_request'|trans }}</button>
+                        </div>
+                        <div class="span4"></div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

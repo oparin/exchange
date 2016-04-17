@@ -1,0 +1,62 @@
+{% extends ':home:base.html.twig' %}
+
+{% block body %}
+<!-- content-top starts
+================================================== -->
+    <div id="content-top">
+        <div id="content-top-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <h1>{{ 'home.login.forgot_password'|trans }}</h1>
+                        <ul class="breadcrumb">
+                            <li><a href="{{ path('home_index') }}">{{ 'home.home'|trans }}</a> <span class="divider">/</span></li>
+                            <li class="active">{{ 'home.login.forgot_password'|trans }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- content-top ends
+
+<!-- content starts
+================================================== -->
+    <section id="content">
+        <div class="container">
+
+            <!--row (first) starts-->
+            <div class="row">
+
+                <!--first column starts-->
+                <div class="span6">
+                    <h3>{{ 'home.login.enter_username'|trans }}</h3>
+                    <p>
+                        {% if invalid_username is defined %}
+                            <div style="color: red">{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}, 'FOSUserBundle') }}</div>
+                        {% endif %}
+                    </p>
+                    <form id="contactform" action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+                        <fieldset>
+                            <p>
+                                <input type="text" id="username" name="username" required="required" placeholder="{{ 'home.login.username'|trans }}" />
+                            </p>
+                            <p>
+                                <input type="submit" value="{{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}" class="submit"/>
+                            </p>
+                            <div id="result"></div>
+                        </fieldset>
+                        <form>
+                </div>
+                <!--first column ends-->
+
+                {% include(':home:second_column.html.twig') %}
+
+            </div>
+            <!--row (first) ends-->
+
+        </div>
+    </section>
+    <!-- content ends
+    ================================================== -->
+{% endblock body %}

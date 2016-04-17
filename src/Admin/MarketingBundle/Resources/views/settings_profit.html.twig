@@ -1,0 +1,111 @@
+{% extends '::base.html.twig' %}
+
+{% form_theme form '::twig_theme.html.twig' %}
+
+{% block title_content %}<i class="fa fa-gear"></i>&nbsp; Маркетинг{% endblock title_content %}
+
+{% block content %}
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        {% include '::alert_succes.html.twig' with {'text' : flashMessage} %}
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        {% include '::alert_error.html.twig' with {'text' : flashMessage} %}
+    {% endfor %}
+    {% if form_errors(form) %}
+        {% include '::alert_error.html.twig' with {'text' : form_errors(form)} %}
+    {% endif %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box">
+                <header>
+                    <div class="icons">
+                        <i class="fa fa-edit"></i>
+                    </div>
+                    <h5>Начисление баллов</h5>
+                </header>
+                <div id="collapse4" class="body">
+                    {{ form_start(form, {'attr': {'class': 'form-horizontal'} }) }}
+                        <div class="form-group {% if form_errors(form.statusFrom) %}has-error{% endif %}">
+                            {{ form_label(form.statusFrom, 'Статус (от кого)', {'label_attr': {'class': 'control-label col-lg-2'}}) }}
+                            <div class="col-lg-4">
+                                {{ form_widget(form.statusFrom, {'attr': {'class': 'form-control', 'placeholder': ''}}) }}
+                                {% if form_errors(form.statusFrom) %}
+                                    <span id="required2-error" class="help-block">{{ form_errors(form.statusFrom) }}</span>
+                                {% endif %}
+                            </div>
+                        </div><!-- /.form-group -->
+
+                        <div class="form-group {% if form_errors(form.statusTo) %}has-error{% endif %}">
+                            {{ form_label(form.statusTo, 'Статус (кому)', {'label_attr': {'class': 'control-label col-lg-2'}}) }}
+                            <div class="col-lg-4">
+                                {{ form_widget(form.statusTo, {'attr': {'class': 'form-control', 'placeholder': ''}}) }}
+                                {% if form_errors(form.statusTo) %}
+                                    <span id="required2-error" class="help-block">{{ form_errors(form.statusTo) }}</span>
+                                {% endif %}
+                            </div>
+                        </div><!-- /.form-group -->
+
+                        <div class="form-group {% if form_errors(form.points) %}has-error{% endif %}">
+                            {{ form_label(form.points, 'Очки', {'label_attr': {'class': 'control-label col-lg-2'}}) }}
+                            <div class="col-lg-4">
+                                {{ form_widget(form.points, {'attr': {'class': 'form-control', 'placeholder': ''}}) }}
+                                {% if form_errors(form.points) %}
+                                    <span id="required2-error" class="help-block">{{ form_errors(form.points) }}</span>
+                                {% endif %}
+                            </div>
+                        </div><!-- /.form-group -->
+                    {{ form_rest(form) }}
+                        <div class="form-group">
+                            <div class="control-label col-lg-2"></div>
+                            <div style="" class="col-lg-9">
+                                <input type="submit" value="Сохранить" class="btn btn-metis-6 btn-sm">
+                            </div>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box">
+                <header>
+                    <div class="icons">
+                        <i class="fa fa-table"></i>
+                    </div>
+                    <h5>Все статусы</h5>
+                </header>
+                <div id="collapse4" class="body">
+                    <table class="table table-bordered table-condensed table-hover table-striped dataTable">
+                        <thead>
+                        <tr class="grid-row-titles">
+                            <th class="sorting " style="color: black; width: 40%">Статус (кому)</th>
+                            <th class="sorting " style="color: black; width: 20%">Статус (от кого)</th>
+                            <th class="sorting " style="color: black; width: 20%">Очки</th>
+                            <th class="last-column" style="width: 10%"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for profit in profits %}
+                            <tr class="grid-row-cells even">
+                                <td class="grid-column-lastIp">{{ profit.statusFrom.name }}</td>
+                                <td class="grid-column-registrationDate">{{ profit.statusTo.name }}</td>
+                                <td class="grid-column-registrationDate">{{ profit.points }}</td>
+                                <td class="" style="text-align: center">
+                                    <a target="_self" href="{{ path('marketing_settings_profit', {'id': profit.id}) }}" class="action-icon" style="margin-left: 10px">
+                                        <i class="glyphicon glyphicon-edit"></i>
+                                    </a>
+                                    {#<a target="_self" href="{{ path('admin_settings_members_status_delete', {'id': status.id}) }}" class="action-icon" style="margin-left: 10px">#}
+                                    {#<i class="glyphicon glyphicon-remove"></i>#}
+                                    {#</a>#}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

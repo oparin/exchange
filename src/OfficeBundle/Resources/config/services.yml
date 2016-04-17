@@ -1,0 +1,6 @@
+services:
+    locale.locale_listener.unauthenticated:
+        class: OfficeBundle\EventListener\LocaleListener
+#        arguments: ["%kernel.default_locale%", "@security.context"]
+        tags:
+            - { name: kernel.event_listener, priority: 17, event: kernel.request }

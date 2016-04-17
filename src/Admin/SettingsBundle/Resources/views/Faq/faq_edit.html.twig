@@ -1,0 +1,72 @@
+{% extends '::base.html.twig' %}
+
+{#{% form_theme form ':admin:twig_theme.html.twig' %}#}
+
+{% block title_content %}
+    <i class="fa fa-question-circle"></i>&nbsp; Вопросы-ответы
+{% endblock title_content %}
+
+{% block content %}
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        {% include '::alert_succes.html.twig' with {'text' : flashMessage} %}
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        {% include '::alert_error.html.twig' with {'text' : flashMessage} %}
+    {% endfor %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box">
+                <header>
+                    <div class="icons">
+                        <i class="fa fa-edit"></i>
+                    </div>
+                    <h5>Редактировать вопрос-ответ</h5>
+                </header>
+                <div class="body" id="collapse4">
+                    <div class="body">
+                        {{ form_start(form, {'attr': {'class': 'form-horizontal'} }) }}
+                        <div class="form-group {% if form_errors(form.title) %}has-error{% endif %}">
+                            {{ form_label(form.title, null, {'label_attr': {'class': 'control-label col-lg-2'}}) }}
+                            <div class="col-lg-4">
+                                {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                                {% if form_errors(form.title) %}
+                                    <span id="required2-error" class="help-block">{{ form_errors(form.title) }}</span>
+                                {% endif %}
+                            </div>
+                        </div><!-- /.form-group -->
+
+                        <div class="form-group {% if form_errors(form.text) %}has-error{% endif %}">
+                            {{ form_label(form.text, null, {'label_attr': {'class': 'control-label col-lg-2'}}) }}
+                            <div class="col-lg-10">
+                                {{ tinymce_init() }}
+                                {{ form_widget(form.text, {'attr': {'class': 'tinymce', 'rows': '15'}}) }}
+                                {% if form_errors(form.text) %}
+                                    <span id="required2-error" class="help-block">{{ form_errors(form.text) }}</span>
+                                {% endif %}
+                            </div>
+                        </div><!-- /.form-group -->
+
+                        <div class="form-group {% if form_errors(form.locale) %}has-error{% endif %}">
+                            {{ form_label(form.locale, null, {'label_attr': {'class': 'control-label col-lg-2'}}) }}
+                            <div class="col-lg-4">
+                                {{ form_widget(form.locale, {'attr': {'class': 'form-control'}}) }}
+                                {% if form_errors(form.locale) %}
+                                    <span id="required2-error" class="help-block">{{ form_errors(form.locale) }}</span>
+                                {% endif %}
+                            </div>
+                        </div><!-- /.form-group -->
+
+                        {{ form_rest(form) }}
+                        <div class="form-group">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-4">
+                                <input type="submit" class="btn btn-primary" value="Сохранить">
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

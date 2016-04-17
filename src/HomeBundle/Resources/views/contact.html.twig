@@ -1,0 +1,99 @@
+{% extends ':home:base.html.twig' %}
+
+{% block style %}
+    {#<script src='https://www.google.com/recaptcha/api.js'></script>#}
+{% endblock style %}
+
+{% block body %}
+    <!-- content-top starts
+================================================== -->
+    <div id="content-top">
+        <div id="content-top-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <h1>{{ 'home.contact'|trans }}</h1>
+                        <ul class="breadcrumb">
+                            <li><a href="{{ path('home_index') }}">{{ 'home.home'|trans }}</a> <span class="divider">/</span></li>
+                            <li class="active">{{ 'home.contact'|trans }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- content-top ends
+
+    <!-- content starts
+================================================== -->
+    <section id="content">
+        <div class="container">
+
+            <!--row (first) starts-->
+            <div class="row">
+
+                <!--first column starts-->
+                <div class="span6">
+                    <h3>{{ 'home.contacts.drop_us_a_mail'|trans }}</h3>
+                    <p>
+                        {% for flashMessage in app.session.flashbag.get('success') %}
+                            <h2 style="color: green">{{ flashMessage }}</h2>
+                        {% endfor %}
+                        {% for flashMessage in app.session.flashbag.get('error') %}
+                            <h2 style="color: red">{{ flashMessage }}</h2>
+                        {% endfor %}
+                    </p>
+                    {{ form_start(form, {'attr': {'id': 'contactform'}}) }}
+                        <fieldset>
+                            <p>
+                                {{ form_widget(form.name, {'attr': {'placeholder': 'home.contacts.your_name'|trans}}) }}
+                            </p>
+                            <p>
+                                {% if form_errors(form.email) %}
+                                    <div style="margin-left: 20px; color: red;">{{ form_errors(form.email) }}</div>
+                                {% endif %}
+                                {{ form_widget(form.email, {'attr': {'placeholder': 'home.contacts.email_address'|trans}}) }}
+                            </p>
+                            <p>
+                                {{ form_widget(form.theme) }}
+                            </p>
+                            <p>
+                                {{ form_widget(form.message, {'attr': {'rows': '7', 'placeholder': 'home.contacts.write_message'|trans}}) }}
+                            </p>
+                            <p>
+                                <script type="text/javascript">
+                                    var onloadCallback = function() {
+                                        grecaptcha.render('captcha', {
+                                            'sitekey' : '6LeHkBkTAAAAAGMLR27jcliL5CPMpkvqH2cg1IQR',
+                                            'hl' : 'en',
+                                            'theme' : 'light'
+                                        });
+                                    };
+                                </script>
+                            <div id="captcha"></div>
+                            </p>
+                            {{ form_rest(form) }}
+                            <p>
+                                <input type="submit" value="{{ 'home.contacts.submit'|trans }}" class="submit"/>
+                            </p>
+                            <div id="result"></div>
+                        </fieldset>
+                    {{ form_end(form) }}
+                    <script src="https://www.google.com/recaptcha/api.js?hl=en&onload=onloadCallback&render=explicit"
+                            async defer>
+                    </script>
+                </div>
+                <!--first column ends-->
+
+                {{ page.text|raw }}
+
+            </div>
+            <!--row (first) ends-->
+
+        </div>
+    </section>
+    <!-- content ends
+    ================================================== -->
+
+
+{% endblock body %}

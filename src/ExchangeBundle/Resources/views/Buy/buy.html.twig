@@ -1,0 +1,217 @@
+{% extends ':office:base.html.twig' %}
+
+{% form_theme form ':office:twig_theme.html.twig' %}
+
+{% block style %}
+    <link href="{{ asset('lib/argo/common/theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css') }}" rel="stylesheet" />
+{% endblock style %}
+
+{% block title %}{{ 'buy.buy'|trans }}{% endblock %}
+
+{% block title_content %}
+    {{ 'buy.buy'|trans }}
+{% endblock %}
+
+{% block content %}
+    <div class="innerLR">
+        <div class="row-fluid">
+            <!-- Column -->
+            <div class="span12">
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    {% include ':office:alert_success.html.twig' with {'message' : flashMessage} %}
+                {% endfor %}
+                {% for flashMessage in app.session.flashbag.get('error') %}
+                    {% include ':office:alert_error.html.twig' with {'message' : flashMessage} %}
+                {% endfor %}
+                <!-- Widget -->
+                <div class="widget">
+
+                    <!-- Widget heading -->
+                    <div class="widget-head">
+                        <h4 class="heading">{{ 'buy.purchase'|trans }}</h4>
+                    </div>
+                    <!-- // Widget heading END -->
+
+                    <div class="widget-body">
+                        <div class="alert" style="background-color: #FEFF9F; color: black; text-align: center; height: 20px">
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <strong>M</strong> - {{ 'buy.main_account'|trans }}
+                                </div>
+                                {#<div class="span4">#}
+                                    {#<strong>A</strong> - {{ 'buy.arbitrage_account'|trans }}#}
+                                {#</div>#}
+                                {#<div class="span6">#}
+                                    {#<strong>B</strong> - {{ 'buy.bonus_account'|trans }}#}
+                                {#</div>#}
+                            </div>
+			            </div>
+                        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                        <div class="row-fluid">
+                            <div class="span6">
+                                <div class="well">
+                                    <!-- Group -->
+                                    <div class="control-group {% if form_errors(form.typeBalance) %}error{% endif %}">
+                                        {{ form_label(form.typeBalance, 'buy.account'|trans, {'label_attr': {'class': 'control-label'}}) }}
+                                        <div class="controls">
+                                            {{ form_widget(form.typeBalance, {'attr': {'class': 'span12'}}) }}
+                                            {% if form_errors(form.typeBalance) %}
+                                                <p class="error help-block">
+                                                    <span class="label label-important">{{ form_errors(form.typeBalance) }}</span>
+                                                </p>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <!-- // Group END -->
+
+                                    <!-- Group -->
+                                    <div class="control-group {% if form_errors(form.quantity) %}error{% endif %}">
+                                        {{ form_label(form.quantity, 'buy.quantity'|trans ~ ' ' ~ currency, {'label_attr': {'class': 'control-label'}}) }}
+                                        <div class="controls">
+                                            {{ form_widget(form.quantity, {'attr': {'class': 'span12 quantity'}}) }}
+                                            {% if form_errors(form.quantity) %}
+                                                <p class="error help-block">
+                                                    <span class="label label-important">{{ form_errors(form.quantity) }}</span>
+                                                </p>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <!-- // Group END -->
+
+                                    <!-- Group -->
+                                    <div class="control-group {% if form_errors(form.price) %}error{% endif %}">
+                                        {{ form_label(form.price, 'buy.price'|trans ~ ' ' ~ currency, {'label_attr': {'class': 'control-label'}}) }}
+                                        <div class="controls">
+                                            {{ form_widget(form.price, {'attr': {'class': 'span12 price', 'style': 'color: #555555'}}) }}
+                                            {% if form_errors(form.price) %}
+                                                <p class="error help-block">
+                                                    <span class="label label-important">{{ form_errors(form.price) }}</span>
+                                                </p>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <!-- // Group END -->
+                                </div>
+                            </div>
+                            <div class="span6">
+                                <div class="well" style="height: 130px">
+                                    <div class="control-group">
+                                        <label class="control-label required">{{ 'buy.amount'|trans }}</label>
+                                        <div class="controls">
+                                            <div style="width: 87%" class="input-append">
+                                                <input id="sum" type="text" class="span12" disabled readonly style="text-align: right">
+                                                <span style=" color: #262626; font-weight: bold" class="add-on">
+                                                     $
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label required">{{ 'buy.commission'|trans }}</label>
+                                        <div class="controls">
+                                            <div style="width: 87%" class="input-append">
+                                                <input id="commission" type="text" class="span12" disabled readonly style="text-align: right">
+                                                <span style=" color: #262626; font-weight: bold" class="add-on">
+                                                     $
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{ form_rest(form) }}
+
+                        <div class="row-fluid" style="margin-top: 10px">
+                            <div class="span5"></div>
+                            <div class="span2" style="text-align: center">
+                                <button class="btn btn-success hidden-phone" type="submit">{{ 'buy.buy'|trans }}</button>
+                            </div>
+                            <div class="span5"></div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+                <!-- // Widget END -->
+
+            </div>
+            <!-- // Column END -->
+        </div>
+
+        <div class="row-fluid">
+            <!-- Column -->
+            <div class="span12">
+                <!-- Widget -->
+                <div class="widget">
+
+                    <!-- Widget heading -->
+                    <div class="widget-head">
+                        <h4 class="heading">{{ 'buy.buying_wait'|trans }}</h4>
+                    </div>
+                    <!-- // Widget heading END -->
+
+                    <div class="widget-body">
+                        {#{{ grid(bid_wait, ':office:grid.jquery.html.twig') }}#}
+                        {{ grid(bid_wait, ':office:grid.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <!-- Column -->
+            <div class="span12">
+                <!-- Widget -->
+                <div class="widget">
+
+                    <!-- Widget heading -->
+                    <div class="widget-head">
+                        <h4 class="heading">{{ 'buy.buying_complete'|trans }}</h4>
+                    </div>
+                    <!-- // Widget heading END -->
+
+                    <div class="widget-body">
+                        {#{{ grid(bid_wait, ':office:grid.jquery.html.twig') }}#}
+                        {{ grid(bid_complete, ':office:grid.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        calculate();
+    });
+    $('.quantity').keydown(function(){
+        setTimeout(function(){
+            calculate();
+        }, 100);
+    });
+    $('.price').keydown(function(){
+        setTimeout(function(){
+            calculate();
+        }, 100);
+
+    });
+
+    function calculate() {
+        var quantity = $('.quantity').val();
+        if (quantity == '') {
+            quantity = 0;
+        }
+        var price = $('.price').val();
+        if (price == '') {
+            price = 0;
+        }
+        var commission = {{ commission }};
+        var sum = quantity * parseFloat(price).toFixed(2);
+        $('#sum').val(sum.toFixed(2));
+        commission = sum.toFixed(2) * commission / 100;
+        $('#commission').val(commission.toFixed(2));
+    };
+</script>
+{% endblock js %}

@@ -1,0 +1,176 @@
+{% extends '::base.html.twig' %}
+
+{% form_theme form '::twig_theme.html.twig' %}
+
+{% block title_content %}<i class="fa fa-gear"></i>&nbsp; Настройки{% endblock title_content %}
+
+{% block content %}
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        {% include '::alert_succes.html.twig' with {'text' : flashMessage} %}
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        {% include '::alert_error.html.twig' with {'text' : flashMessage} %}
+    {% endfor %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box">
+                <header>
+                    <div class="icons">
+                        <i class="fa fa-edit"></i>
+                    </div>
+                    <h5>Статус пользователя</h5>
+                </header>
+                <div id="collapse4" class="body">
+                    {{ form_start(form, {'attr': {'class': 'form-horizontal'} }) }}
+                    <div class="form-group {% if form_errors(form.name) %}has-error{% endif %}">
+                        {{ form_label(form.name, 'Имя статуса', {'label_attr': {'class': 'control-label col-lg-2'}}) }}
+                        <div class="col-lg-4">
+                            {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': ''}}) }}
+                            {% if form_errors(form.name) %}
+                                <span id="required2-error" class="help-block">{{ form_errors(form.name) }}</span>
+                            {% endif %}
+                        </div>
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group {% if form_errors(form.price) %}has-error{% endif %}">
+                        {{ form_label(form.price, 'Цена', {'label_attr': {'class': 'control-label col-lg-2'}}) }}
+                        <div class="col-lg-4">
+                            {{ form_widget(form.price, {'attr': {'class': 'form-control', 'placeholder': '0'}}) }}
+                            {% if form_errors(form.price) %}
+                                <span id="required2-error" class="help-block">{{ form_errors(form.price) }}</span>
+                            {% endif %}
+                        </div>
+                    </div><!-- /.form-group -->
+
+                    {#<div class="form-group {% if form_errors(form.sponsorBonus) %}has-error{% endif %}">#}
+                        {#{{ form_label(form.sponsorBonus, 'Бонус за личного (%)', {'label_attr': {'class': 'control-label col-lg-2'}}) }}#}
+                        {#<div class="col-lg-4">#}
+                            {#{{ form_widget(form.sponsorBonus, {'attr': {'class': 'form-control', 'placeholder': '0'}}) }}#}
+                            {#{% if form_errors(form.sponsorBonus) %}#}
+                                {#<span id="required2-error" class="help-block">{{ form_errors(form.sponsorBonus) }}</span>#}
+                            {#{% endif %}#}
+                        {#</div>#}
+                    {#</div><!-- /.form-group -->#}
+
+                    <div class="form-group {% if form_errors(form.percent) %}has-error{% endif %}">
+                        {{ form_label(form.percent, 'Процент от баллов (%)', {'label_attr': {'class': 'control-label col-lg-2'}}) }}
+                        <div class="col-lg-4">
+                            {{ form_widget(form.percent, {'attr': {'class': 'form-control', 'placeholder': '0'}}) }}
+                            {% if form_errors(form.percent) %}
+                                <span id="required2-error" class="help-block">{{ form_errors(form.percent) }}</span>
+                            {% endif %}
+                        </div>
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group">
+                        {{ form_label(form.imageFile, 'Изображение', { 'label_attr': {'class': 'control-label col-lg-2'} }) }}
+                        <div class="col-lg-8">
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 310px; height: 210px;">
+                                    {% if app.request.get('id') %}
+                                        {% if form.vars.value.image %}
+                                            <img src="{{ vich_uploader_asset(status, 'imageFile') }}" alt="" style="width: 310px; height: 200px" />
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                                <div>
+                                      <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span>
+                                          {#<span class="fileinput-exists">Change</span>#}
+                                          {{ form_widget(form.imageFile) }}
+                                      </span>
+                                    {#<a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>#}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        {{ tinymce_init() }}
+                        {{ form_label(form.description, 'Описание', { 'label_attr': {'class': 'control-label col-lg-2'} }) }}
+                        <div class="col-lg-10">
+                            {{ form_widget(form.description) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group {% if form_errors(form.miningRights) %}has-error{% endif %}">
+                        {{ form_label(form.miningRights, null, {'label_attr': {'class': 'control-label col-lg-2'}}) }}
+                        <div class="col-lg-4">
+                            {{ form_widget(form.miningRights, {'attr': {'class': 'form-control', 'placeholder': '0'}}) }}
+                            {% if form_errors(form.miningRights) %}
+                                <span id="required2-error" class="help-block">{{ form_errors(form.miningRights) }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    {{ form_rest(form) }}
+                    <div class="form-group">
+                        <div class="control-label col-lg-2"></div>
+                        <div style="" class="col-lg-9">
+                            <input type="submit" value="Сохранить" class="btn btn-metis-6 btn-sm">
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box">
+                <header>
+                    <div class="icons">
+                        <i class="fa fa-table"></i>
+                    </div>
+                    <h5>Все статусы</h5>
+                </header>
+                <div id="collapse4" class="body">
+                    <table class="table table-bordered table-condensed table-hover table-striped dataTable">
+                        <thead>
+                            <tr class="grid-row-titles">
+                                <th class="sorting " style="color: black; width: 40%">Имя статуса</th>
+                                <th class="sorting " style="color: black; width: 20%">Цена</th>
+                                {#<th class="sorting " style="color: black; width: 20%">Бонус за личного (%)</th>#}
+                                <th class="sorting " style="color: black; width: 20%">Процент от баллов (%)</th>
+                                <th class="sorting " style="color: black; width: 20%">Mining rights</th>
+                                <th class="last-column" style="width: 10%"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for status in statuses %}
+                            <tr class="grid-row-cells even">
+                                <td class="grid-column-lastIp">{{ status.name }}</td>
+                                <td class="grid-column-registrationDate">{{ status.price }}</td>
+                                {#<td class="grid-column-registrationDate">{{ status.sponsorBonus }}</td>#}
+                                <td class="grid-column-registrationDate">{{ status.percent }}</td>
+                                <td class="grid-column-registrationDate">{{ status.miningRights }}</td>
+                                <td class="" style="text-align: center">
+                                    <a target="_self" href="{{ path('admin_settings_members_status_settings', {'id': status.id}) }}" class="action-icon" style="margin-left: 10px">
+                                        <i class="glyphicon glyphicon-edit"></i>
+                                    </a>
+                                    {#<a target="_self" href="{{ path('admin_settings_members_status_delete', {'id': status.id}) }}" class="action-icon" style="margin-left: 10px">#}
+                                        {#<i class="glyphicon glyphicon-remove"></i>#}
+                                    {#</a>#}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <script>
+        $(function() {
+            Metis.formWizard();
+        });
+    </script>
+    <script>
+        $(function() {
+            Metis.formGeneral();
+        });
+    </script>
+{% endblock js %}

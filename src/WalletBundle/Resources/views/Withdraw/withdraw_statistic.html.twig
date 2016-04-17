@@ -1,0 +1,50 @@
+{% extends ':office:base.html.twig' %}
+
+{% block title %}{{ 'withdraw.withdraw'|trans }}{% endblock %}
+
+{% block title_content %}
+    {{ 'withdraw.withdraw'|trans }}
+{% endblock %}
+
+{% block content %}
+    <div class="innerLR">
+        <div class="row-fluid">
+            <!-- Column -->
+            <div class="span12">
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    {% include ':office:alert_success.html.twig' with {'message' : flashMessage} %}
+                {% endfor %}
+                {% for flashMessage in app.session.flashbag.get('error') %}
+                    {% include ':office:alert_error.html.twig' with {'message' : flashMessage} %}
+                {% endfor %}
+                <!-- Widget -->
+                <div class="widget">
+                    <!-- Widget heading -->
+                    <div class="widget-head">
+                        <h4 class="heading">
+                            {{ 'withdraw.stattistic'|trans }}
+                        </h4>
+                    </div>
+                    <!-- // Widget heading END -->
+
+                    <div class="widget-body" style="">
+                        <div class="alert" style="background-color: #FEFF9F; color: black; text-align: center; height: 20px">
+                            <div class="row-fluid">
+                                <div class="span4">
+                                    <img src="{{ asset('images/flag_yellow.png') }}" width="24"> - {{ 'withdraw.wait'|trans }}
+                                </div>
+                                <div class="span4">
+                                    <img src="{{ asset('images/flag_green.png') }}" width="24"> - {{ 'withdraw.done'|trans }}
+                                </div>
+                                <div class="span4">
+                                    <img src="{{ asset('images/flag_red.png') }}" width="24"> - {{ 'withdraw.refund'|trans }}
+                                </div>
+                            </div>
+                        </div>
+                        {{ grid(grid, ':office:grid.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

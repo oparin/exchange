@@ -1,0 +1,44 @@
+{% extends ':office:base.html.twig' %}
+
+{% block title %}{{ 'referrals.referrals'|trans }}{% endblock %}
+
+{% block title_content %}
+    {{ 'referrals.referrals'|trans }}
+{% endblock %}
+
+{% block content %}
+    <div class="innerLR">
+        <div class="row-fluid">
+            <!-- Column -->
+            <div class="span12">
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    {% include ':office:alert_success.html.twig' with {'message' : flashMessage} %}
+                {% endfor %}
+                {% for flashMessage in app.session.flashbag.get('error') %}
+                    {% include ':office:alert_error.html.twig' with {'message' : flashMessage} %}
+                {% endfor %}
+                <!-- Widget -->
+                <div class="widget">
+                    <!-- Widget heading -->
+                    <div class="widget-head">
+                        <h4 class="heading">
+                            {{ 'referrals.my_referrals'|trans }}
+                        </h4>
+                    </div>
+                    <!-- // Widget heading END -->
+
+                    <div class="widget-body" style="">
+                        <div class="alert" style="background-color: #FEFF9F; color: black; text-align: center; height: 20px">
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    {{ 'referrals.ref_link'|trans }} - <strong>https://{{ app.request.host }}/?ref={{ app.user.username }}</strong>
+                                </div>
+                            </div>
+                        </div>
+                        {{ grid(grid, ':office:grid.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

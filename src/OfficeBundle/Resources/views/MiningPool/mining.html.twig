@@ -1,0 +1,408 @@
+{% extends ':office:base.html.twig' %}
+
+{% block style %}
+    {#<link href="{{ asset('lib/argo/common/bootstrap/css/bootstrap.css') }}" rel="stylesheet" />#}
+{% endblock style %}
+
+{% block title %}{{ 'mining_pool.mining'|trans }}{% endblock %}
+
+{% block title_content %}
+    {{ 'mining_pool.mining'|trans }}
+{% endblock %}
+
+{% block content %}
+    <div class="innerLR">
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            {% include ':office:alert_success.html.twig' with {'message' : flashMessage} %}
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('error') %}
+            {% include ':office:alert_error.html.twig' with {'message' : flashMessage} %}
+        {% endfor %}
+
+        <!-- Stats Widgets -->
+        <div class="row-fluid widget-stats-group">
+            <div class="span3">
+                <!-- Stats Widget -->
+                <div class="widget-stats" style="height: 85px">
+                    <span class="" style="font-size: 20px; padding-bottom: 15px; color: #ffffff">{{ 'mining_pool.eth_mining_rights'|trans }}</span>
+                    <div style="font-size: 30px; font-weight: bold; color: white; height: 30px">{{ app.user.miningRights }}</div>
+                    <div style="clear: both"></div>
+                    <div>
+                        <div style="float: left; margin-left: 10px">
+                            <input id="buy" type="button" value="{{ 'mining_pool.buy'|trans }}" style="width: 100px;">
+                        </div>
+                        <div style="float: right; margin-right: 10px">
+                            <input id="send-pool" type="button" value="{{ 'mining_pool.send_to_pool'|trans }}" style="width: {% if app.request.locale == 'ru' %}130px{% else %}100px{% endif %}">
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <!-- // Stats Widget END -->
+            </div>
+
+            <div class="span3">
+                <!-- Stats Widget -->
+                <a href="" class="widget-stats" style="cursor: default; pointer-events: none; height: 85px">
+                    <span class="" style="font-size: 20px; padding-bottom: 35px; color: #ffffff">{{ 'mining_pool.mining_rights_in_work'|trans }}</span>
+                    <div style="font-size: 30px; font-weight: bold; color: white">{{ app.user.miningRightsInWork }}</div>
+                    <div style="clear: both"></div>
+                    <div class="clearfix"></div>
+                    {#<span class="count label label-success">0.00</span>#}
+                </a>
+                <!-- // Stats Widget END -->
+            </div>
+
+            <div class="span3">
+                <!-- Stats Widget -->
+                <div class="widget-stats" style="height: 85px">
+                    <span class="" style="font-size: 20px; padding-bottom: 15px; color: #ffffff">{{ 'mining_pool.pool_wallet'|trans }}</span>
+                    <div style="font-size: 30px; font-weight: bold; color: white; height: 30px">{{ app.user.poolWallet }} {{ currency }}</div>
+                    <div style="clear: both"></div>
+                    <div>
+                        <div style="float: left; margin-left: 10px">
+                            <input id="sell" type="button" value="{{ 'mining_pool.sell'|trans }}" style="width: 100px;">
+                        </div>
+                        <div style="float: right; margin-right: 10px">
+                            <input id="convert" type="button" value="{{ 'mining_pool.convert'|trans }}" style="width: {% if app.request.locale == 'ru' %}130px{% else %}100px{% endif %}">
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    {#<span class="count label label-success">0.00</span>#}
+                </div>
+                <!-- // Stats Widget END -->
+            </div>
+
+            <div class="span3">
+                <!-- Stats Widget -->
+                <a href="" class="widget-stats" style="cursor: default; pointer-events: none; height: 85px;">
+                    <span class="" style="font-size: 20px; padding-bottom: 0px; color: #ffffff">{{ 'mining_pool.rates'|trans }}</span>
+                    <table style="width: 100%">
+                        <tr>
+                            <td style="width: 25%">{{ 'mining_pool.buy'|trans }}</td>
+                            <td style="width: 25%">1 ETH</td>
+                            <td style="width: 10px">=</td>
+                            <td style="width: 40%">{{ rates.buy }} $</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 25%">{{ 'mining_pool.sell'|trans }}</td>
+                            <td style="width: 25%">1 ETH</td>
+                            <td style="width: 10px">=</td>
+                            <td style="width: 40%">{{ rates.sell }} $</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 25%">{{ 'mining.convertation'|trans }}</td>
+                            <td style="width: 25%">1 ETH</td>
+                            <td style="width: 10px">=</td>
+                            <td style="width: 40%">{{ rates.convertat }} {{ currency }} {{ 'mining.mr'|trans }}</td>
+                        </tr>
+                    </table>
+                    <div style="clear: both"></div>
+                    <div class="clearfix"></div>
+                    {#<span class="count label label-success">0.00</span>#}
+                </a>
+                <!-- // Stats Widget END -->
+            </div>
+
+        </div>
+
+        <div class="separator bottom"></div>
+
+        <div class="widget" data-toggle="widget">
+            <div class="widget-head">
+                <h4 class="heading glyphicons cardio"><i></i>{{ 'mining_pool.split_progress_bar'|trans }}</h4>
+            </div>
+            <div class="widget-body">
+                <div class="progress">
+                    <div class="progress progress-primary">
+                        <div class="bar" style="width: {{ settings.progressBar }}%;"></div>
+                    </div>
+                </div>
+                <div style="width: 100%; text-align: center; color: white; font-size: 18px">
+                    {{ settings.progressBar }}%
+                </div>
+            </div>
+        </div>
+
+        <div class="separator bottom"></div>
+
+        <!-- Website Traffic Chart -->
+        <div class="widget" data-toggle="widget">
+            <div class="widget-head">
+                <h4 class="heading glyphicons cardio"><i></i>{{ 'mining_pool.split_histoty'|trans }}</h4>
+            </div>
+            <div class="widget-body">
+                {#<div id="chart_simple" style="height: 250px;"></div>#}
+                <div id="chart_lines_fill_nopoints" style="height: 250px;"></div>
+            </div>
+        </div>
+        <!-- // Website Traffic Chart END -->
+
+        <div class="separator bottom"></div>
+
+        <div class="widget" data-toggle="widget">
+            <div class="widget-head">
+                <h4 class="heading glyphicons cardio"><i></i>{{ 'mining_pool.mining_history'|trans }}</h4>
+            </div>
+            <div class="widget-body">
+                {{ grid(grid, ':office:grid.html.twig') }}
+            </div>
+        </div>
+    </div>
+
+    <a id="button-buy" href="#modal-buy" data-toggle="modal" class="btn btn-primary" style="display: none">Open Buy Modal</a>
+    <!-- Modal -->
+    <div class="modal hide fade" id="modal-buy">
+
+        <!-- Modal heading -->
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>{{ 'mining.buy'|trans }}</h3>
+        </div>
+        <!-- // Modal heading END -->
+
+        <!-- Modal body -->
+        {{ form_start(form_buy) }}
+        <div class="modal-body">
+            <table style="width: 100%">
+                <tr>
+                    <td style="width: 50%; text-align: left">{{ 'mining.main_account'|trans }}</td>
+                    {% set accounts = app.user.accounts %}
+                    <td style="text-align: right">{{ accounts[0].sum }} $</td>
+                </tr>
+                <tr>
+                    <td style="width: 50%; text-align: left">{{ 'mining.current_rate'|trans }}</td>
+                    <td style="text-align: right">1 {{ currency }} {{ 'mining.mr'|trans }} = {{ rates.buy }} $</td>
+                </tr>
+                <tr>
+                    <td style="width: 50%; text-align: left">{{ form_label(form_buy.miningRights) }}</td>
+                    <td style="text-align: right">
+                        {{ form_widget(form_buy.miningRights) }}
+                    </td>
+                </tr>
+                {{ form_rest(form_buy) }}
+            </table>
+        </div>
+        <!-- // Modal body END -->
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" value="{{ 'mining.buy'|trans }}">
+            <a href="#" class="btn btn-default" data-dismiss="modal">{{ 'mining.cancel'|trans }}</a>
+        </div>
+        {{ form_end(form_buy) }}
+        <!-- // Modal footer END -->
+
+    </div>
+    <!-- // Modal END -->
+
+
+    <a id="button-send-pool" href="#modal-send-pooll" data-toggle="modal" class="btn btn-primary" style="display: none">Open Buy Modal</a>
+    <!-- Modal -->
+    <div class="modal hide fade" id="modal-send-pooll">
+
+        <!-- Modal heading -->
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>{{ 'mining_pool.send_to_pool'|trans }}</h3>
+        </div>
+        <!-- // Modal heading END -->
+
+        <!-- Modal body -->
+        {{ form_start(form_send_to_pool) }}
+        <div class="modal-body">
+            <table style="width: 100%">
+                <tr>
+                    <td style="width: 50%; text-align: left">{{ 'mining.avalable_mr'|trans }}</td>
+                    <td style="text-align: right">{{ app.user.miningRights }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 50%; text-align: left">{{ form_label(form_send_to_pool.miningRights) }}</td>
+                    <td style="text-align: right">
+                        {{ form_widget(form_send_to_pool.miningRights) }}
+                    </td>
+                </tr>
+                {{ form_rest(form_send_to_pool) }}
+            </table>
+        </div>
+        <!-- // Modal body END -->
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" value="{{ 'mining.send'|trans }}">
+            <a href="#" class="btn btn-default" data-dismiss="modal">{{ 'mining.cancel'|trans }}</a>
+        </div>
+        {{ form_end(form_send_to_pool) }}
+        <!-- // Modal footer END -->
+
+    </div>
+    <!-- // Modal END -->
+
+
+    <a id="button-sell" href="#modal-sell" data-toggle="modal" class="btn btn-primary" style="display: none">Open Buy Modal</a>
+    <!-- Modal -->
+    <div class="modal hide fade" id="modal-sell">
+
+        <!-- Modal heading -->
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>{{ 'mining_pool.sell'|trans }}</h3>
+        </div>
+        <!-- // Modal heading END -->
+
+        <!-- Modal body -->
+        {{ form_start(form_sell) }}
+        <div class="modal-body">
+            <table style="width: 100%">
+                <tr>
+                    <td style="width: 50%; text-align: left">{{ 'mining.pool_wallet'|trans }}</td>
+                    <td style="text-align: right">{{ app.user.poolWallet }} {{ currency }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 50%; text-align: left">{{ 'mining.current_rate'|trans }}</td>
+                    <td style="text-align: right">1 {{ currency }} = {{ rates.sell }} $</td>
+                </tr>
+                <tr>
+                    <td style="width: 50%; text-align: left">{{ form_label(form_sell.amount) }}</td>
+                    <td style="text-align: right">
+                        {{ form_widget(form_sell.amount) }}
+                    </td>
+                </tr>
+                {{ form_rest(form_sell) }}
+            </table>
+        </div>
+        <!-- // Modal body END -->
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" value="{{ 'mining.sell'|trans }}">
+            <a href="#" class="btn btn-default" data-dismiss="modal">{{ 'mining.cancel'|trans }}</a>
+        </div>
+        {{ form_end(form_sell) }}
+        <!-- // Modal footer END -->
+
+    </div>
+    <!-- // Modal END -->
+
+    <a id="button-convert" href="#modal-convert" data-toggle="modal" class="btn btn-primary" style="display: none">Open Buy Modal</a>
+    <!-- Modal -->
+    <div class="modal hide fade" id="modal-convert">
+
+        <!-- Modal heading -->
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>{{ 'mining_pool.convert'|trans }}</h3>
+        </div>
+        <!-- // Modal heading END -->
+
+        <!-- Modal body -->
+        {{ form_start(form_convert) }}
+        <div class="modal-body">
+            <table style="width: 100%">
+                <tr>
+                    <td style="width: 50%; text-align: left">{{ 'mining.pool_wallet'|trans }}</td>
+                    <td style="text-align: right">{{ app.user.poolWallet }} {{ currency }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 50%; text-align: left">{{ 'mining.current_rate'|trans }}</td>
+                    <td style="text-align: right">1 {{ currency }} = {{ rates.convertat }} {{ 'mining.mr'|trans }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 50%; text-align: left">{{ form_label(form_convert.miningRights) }}</td>
+                    <td style="text-align: right">
+                        {{ form_widget(form_convert.miningRights) }}
+                    </td>
+                </tr>
+                {{ form_rest(form_convert) }}
+            </table>
+        </div>
+        <!-- // Modal body END -->
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" value="{{ 'mining.convert'|trans }}">
+            <a href="#" class="btn btn-default" data-dismiss="modal">{{ 'mining.cancel'|trans }}</a>
+        </div>
+        {{ form_end(form_convert) }}
+        <!-- // Modal footer END -->
+
+    </div>
+    <!-- // Modal END -->
+
+
+
+
+{% endblock content %}
+
+{% block js %}
+    <script type="text/javascript">
+        $("#buy").click(function() {
+            $("#button-buy").trigger("click");
+        });
+
+        $("#send-pool").click(function() {
+            $("#button-send-pool").trigger("click");
+        });
+
+        $("#sell").click(function() {
+            $("#button-sell").trigger("click");
+        });
+
+        $("#convert").click(function() {
+            $("#button-convert").trigger("click");
+        });
+    </script>
+
+    <script src="{{ asset('lib/argo/common/theme/scripts/demo/charts.helper.js') }}"></script>
+    {#<script src="{{ asset('lib/argo/common/theme/scripts/demo/modals.js') }}"></script>#}
+    <script type="text/javascript">
+        var data1 = [
+            {% for stat in statistics %}
+                [{{ loop.index }}, {{ stat.date|date('d') }}],
+            {% endfor %}
+        ];
+        var date = [
+            {% for stat in statistics %}
+                [{{ loop.index }}, "{{ stat.date|date('F-Y') }}"],
+            {% endfor %}
+        ];
+        $.plot($("#chart_lines_fill_nopoints"),
+                [{
+                    {#label: "{{ 'dashboard.max_cource'|trans }}",#}
+                    data: data1
+                }],
+                {
+                    series: {
+                        lines: {
+                            show: true
+                        },
+                        points: {
+                            show: true
+                        }
+                    },
+                    grid: {
+                        hoverable: true,
+                        clickable: false
+                    },
+//                    yaxis: { minTickSize: 1, tickDecimals: 0, min: 1, max: 31, },
+                    yaxis: { minTickSize: 1, tickDecimals: 0 },
+                    xaxis: {ticks: date},
+                    tooltip: true,
+                    tooltipOpts: {
+                        content: "%y",
+//                        content: getTooltip,
+                        shifts: {
+                            x: -30,
+                            y: -50
+                        },
+                        defaultTheme: false
+                    }
+                }
+        );
+
+//        function getTooltip(label, x, y) {
+//            console.log(111);
+//            return "Your sales for " + x + " was $" + y;
+//        }
+    </script>
+{% endblock js %}

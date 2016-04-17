@@ -1,0 +1,12 @@
+services:
+    exchange.listener.sale_bid:
+        class: ExchangeBundle\EventListener\ExchangeListener
+        arguments: [@doctrine.orm.entity_manager, @event_dispatcher]
+        tags:
+            - { name: kernel.event_listener, event: exchange.sell, method: saleBid }
+
+    exchange.listener.buy_bid:
+        class: ExchangeBundle\EventListener\ExchangeListener
+        arguments: [@doctrine.orm.entity_manager, @event_dispatcher]
+        tags:
+            - { name: kernel.event_listener, event: exchange.buy, method: buyBid }

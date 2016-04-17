@@ -1,0 +1,76 @@
+{% extends '::base.html.twig' %}
+
+{#{% form_theme form '::twig_theme.html.twig' %}#}
+
+{% block title_content %}<i class="fa fa-usd"></i>&nbsp; Майнинг Настройки{% endblock title_content %}
+
+{% block content %}
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        {% include '::alert_succes.html.twig' with {'text' : flashMessage} %}
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        {% include '::alert_error.html.twig' with {'text' : flashMessage} %}
+    {% endfor %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box">
+                <header>
+                    <div class="icons">
+                        <i class="fa fa-edit"></i>
+                    </div>
+                    <h5>Курсы</h5>
+                </header>
+                <div id="collapse4" class="body">
+                    {{ form_start(form, {'attr': {'class': 'form-horizontal'} }) }}
+                    <div class="form-group {% if form_errors(form.buy) %}has-error{% endif %}">
+                        {{ form_label(form.buy, 'Покупка', {'label_attr': {'class': 'control-label col-lg-3'}}) }}
+                        <div class="col-lg-4">
+                            {{ form_widget(form.buy, {'attr': {'class': 'form-control'}}) }}
+                            {% if form_errors(form.buy) %}
+                                <span id="required2-error" class="help-block">{{ form_errors(form.buy) }}</span>
+                            {% endif %}
+                        </div>
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group {% if form_errors(form.sell) %}has-error{% endif %}">
+                        {{ form_label(form.sell, 'Продажа', {'label_attr': {'class': 'control-label col-lg-3'}}) }}
+                        <div class="col-lg-4">
+                            {{ form_widget(form.sell, {'attr': {'class': 'form-control'}}) }}
+                            {% if form_errors(form.sell) %}
+                                <span id="required2-error" class="help-block">{{ form_errors(form.sell) }}</span>
+                            {% endif %}
+                        </div>
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group {% if form_errors(form.convertat) %}has-error{% endif %}">
+                        {{ form_label(form.convertat, 'Конвертация', {'label_attr': {'class': 'control-label col-lg-3'}}) }}
+                        <div class="col-lg-4">
+                            {{ form_widget(form.convertat, {'attr': {'class': 'form-control'}}) }}
+                            {% if form_errors(form.convertat) %}
+                                <span id="required2-error" class="help-block">{{ form_errors(form.convertat) }}</span>
+                            {% endif %}
+                        </div>
+                    </div><!-- /.form-group -->
+
+                    {#<div class="form-group {% if form_errors(form.tickerTwo) %}has-error{% endif %}">#}
+                        {#{{ form_label(form.tickerTwo, 'Бегущая строка 2', {'label_attr': {'class': 'control-label col-lg-3'}}) }}#}
+                        {#<div class="col-lg-4">#}
+                            {#{{ form_widget(form.tickerTwo, {'attr': {'class': 'form-control'}}) }}#}
+                            {#{% if form_errors(form.tickerTwo) %}#}
+                                {#<span id="required2-error" class="help-block">{{ form_errors(form.tickerTwo) }}</span>#}
+                            {#{% endif %}#}
+                        {#</div>#}
+                    {#</div><!-- /.form-group -->#}
+                    {{ form_rest(form) }}
+                    <div class="form-group">
+                        <div class="control-label col-lg-3"></div>
+                        <div style="float: right" class="col-lg-9">
+                            <input type="submit" value="Сохранить" class="btn btn-metis-6 btn-sm">
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

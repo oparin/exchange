@@ -1,0 +1,25 @@
+{% extends ':home:base.html.twig' %}
+
+{% block body %}
+    <!-- content-top starts
+================================================== -->
+    <div id="content-top">
+        <div id="content-top-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <h1>{{ 'home.blogs.blog'|trans }}</h1>
+                        <ul class="breadcrumb">
+                            <li><a href="{{ path('home_index') }}">{{ 'home.home'|trans }}</a> <span class="divider">/</span></li>
+                            <li class="active">{{ 'home.blog'|trans }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- content-top ends
+    ================================================== -->
+
+    {{ page.text|raw }}
+{% endblock body %}

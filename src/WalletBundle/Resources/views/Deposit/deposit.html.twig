@@ -1,0 +1,67 @@
+{% extends ':office:base.html.twig' %}
+
+{% block title %}{{ 'deposit.deposit'|trans }}{% endblock %}
+
+{% block title_content %}
+    {{ 'deposit.deposit'|trans }}
+{% endblock %}
+
+{% block content %}
+    <div class="innerLR">
+        <div class="row-fluid">
+            <!-- Column -->
+            <div class="span12">
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    {% include ':office:alert_success.html.twig' with {'message' : flashMessage} %}
+                {% endfor %}
+                {% for flashMessage in app.session.flashbag.get('error') %}
+                    {% include ':office:alert_error.html.twig' with {'message' : flashMessage} %}
+                {% endfor %}
+                <!-- Widget -->
+                <div class="widget">
+                    <!-- Widget heading -->
+                    <div class="widget-head">
+                        <h4 class="heading">
+                            {{ 'deposit.add_funds'|trans }}
+                        </h4>
+                    </div>
+                    <!-- // Widget heading END -->
+
+                    <div class="widget-body" style="">
+                        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                        <div class="row-fluid">
+                            <div class="span2"></div>
+                            <div class="span8">
+                                <div class="well">
+                                    <!-- Group -->
+                                    <div class="control-group {% if form_errors(form.sum) %}error{% endif %}">
+                                        {{ form_label(form.sum, 'deposit.sum'|trans ~ ' ($)', {'label_attr': {'class': 'control-label'}}) }}
+                                        <div class="controls">
+                                            {{ form_widget(form.sum, {'attr': {'class': 'span6'}}) }}
+                                            {% if form_errors(form.sum) %}
+                                                <p class="error help-block">
+                                                    <span class="label label-important">{{ form_errors(form.sum) }}</span>
+                                                </p>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <!-- // Group END -->
+                                </div>
+                            </div>
+                            <div class="span2"></div>
+                        </div>
+                        {{ form_rest(form) }}
+                            <div class="row-fluid" style="margin-top: 10px">
+                                <div class="span5"></div>
+                                <div class="span2" style="text-align: center">
+                                    <button class="btn btn-success hidden-phone" type="submit">{{ 'deposit.add'|trans }}</button>
+                                </div>
+                                <div class="span5"></div>
+                            </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

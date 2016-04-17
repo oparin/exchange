@@ -1,0 +1,39 @@
+{%- block money_widget -%}
+    <div class="input-append" style="width: 87%;">
+        {{ block('form_widget_simple') }}
+        <span class="add-on" style=" color: #262626; font-weight: bold">
+            {{ money_pattern|replace({ '{{ widget }}': '' })|raw }}
+        </span>
+    </div>
+{%- endblock money_widget -%}
+
+{%- block collection_widget -%}
+    {#{% if prototype is defined %}#}
+        {#{%- set attr = attr|merge({'data-prototype': form_row(prototype) }) -%}#}
+    {#{% endif %}#}
+    {#{{- block('form_widget') -}}#}
+{%- endblock collection_widget -%}
+
+{%- block form_widget_compound -%}
+    {#<div {{ block('widget_container_attributes') }}>#}
+        {%- if form.parent is empty -%}
+            {{ form_errors(form) }}
+        {%- endif -%}
+        {{- block('form_rows') -}}
+        {{- form_rest(form) -}}
+    {#</div>#}
+{%- endblock form_widget_compound -%}
+
+{%- block form_rows -%}
+    {% for child in form %}
+        {{- form_row(child) -}}
+    {% endfor %}
+{%- endblock form_rows -%}
+
+{%- block form_row -%}
+    {#<div>#}
+        {#{{- form_label(form) -}}#}
+        {{- form_errors(form) -}}
+        {{- form_widget(form, {'attr':{'class': 'span6'}}) -}}
+    {#</div>#}
+{%- endblock form_row -%}

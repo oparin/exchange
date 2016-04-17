@@ -1,0 +1,202 @@
+{% extends '::base.html.twig' %}
+
+{% form_theme form '::twig_theme.html.twig' %}
+
+{% block title_content %}<i class="fa fa-gear"></i>&nbsp; Настройки{% endblock title_content %}
+
+{% block content %}
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        {% include '::alert_succes.html.twig' with {'text' : flashMessage} %}
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        {% include '::alert_error.html.twig' with {'text' : flashMessage} %}
+    {% endfor %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box">
+                <header>
+                    <div class="icons">
+                        <i class="fa fa-edit"></i>
+                    </div>
+                    <h5>Статистика проекта</h5>
+                </header>
+                <div id="collapse4" class="body">
+                    {{ form_start(form, {'attr': {'class': 'form-horizontal'} }) }}
+                    <div class="form-group {% if form_errors(form.date) %}has-error{% endif %}">
+                        {{ form_label(form.date, 'Дата', {'label_attr': {'class': 'control-label col-lg-3'}}) }}
+                        <div class="col-lg-4">
+                            {{ form_widget(form.date, {'attr': {'class': 'form-control datepicker'}}) }}
+                            {% if form_errors(form.date) %}
+                                <span id="required2-error" class="help-block">
+                                    {{ form_errors(form.date) }}
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div><!-- /.form-group -->
+                    <div class="form-group {% if form_errors(form.averageTime) %}has-error{% endif %}">
+                        {{ form_label(form.averageTime, 'Средний срок (дн.)', {'label_attr': {'class': 'control-label col-lg-3'}}) }}
+                        <div class="col-lg-4">
+                            {{ form_widget(form.averageTime, {'attr': {'class': 'form-control'}}) }}
+                            {% if form_errors(form.averageTime) %}
+                                <span id="required2-error" class="help-block">
+                                    {{ form_errors(form.averageTime) }}
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group {% if form_errors(form.averageAmount) %}has-error{% endif %}">
+                        {{ form_label(form.averageAmount, 'Средняя сумма', {'label_attr': {'class': 'control-label col-lg-3'}}) }}
+                        <div class="col-lg-4">
+                            {{ form_widget(form.averageAmount, {'attr': {'class': 'form-control'}}) }}
+                            {% if form_errors(form.averageAmount) %}
+                                <span id="required2-error" class="help-block">
+                                    {{ form_errors(form.averageAmount) }}
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group {% if form_errors(form.averageRate) %}has-error{% endif %}">
+                        {{ form_label(form.averageRate, 'Средняя ставка (%)', {'label_attr': {'class': 'control-label col-lg-3'}}) }}
+                        <div class="col-lg-4">
+                            {{ form_widget(form.averageRate, {'attr': {'class': 'form-control'}}) }}
+                            {% if form_errors(form.averageRate) %}
+                                <span id="required2-error" class="help-block">
+                                    {{ form_errors(form.averageRate) }}
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group {% if form_errors(form.numberMembers) %}has-error{% endif %}">
+                        {{ form_label(form.numberMembers, 'Всего участников', {'label_attr': {'class': 'control-label col-lg-3'}}) }}
+                        <div class="col-lg-4">
+                            {{ form_widget(form.numberMembers, {'attr': {'class': 'form-control'}}) }}
+                            {% if form_errors(form.numberMembers) %}
+                                <span id="required2-error" class="help-block">
+                                    {{ form_errors(form.numberMembers) }}
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group {% if form_errors(form.newMembers) %}has-error{% endif %}">
+                        {{ form_label(form.newMembers, 'Новых участников', {'label_attr': {'class': 'control-label col-lg-3'}}) }}
+                        <div class="col-lg-4">
+                            {{ form_widget(form.newMembers, {'attr': {'class': 'form-control'}}) }}
+                            {% if form_errors(form.newMembers) %}
+                                <span id="required2-error" class="help-block">
+                                    {{ form_errors(form.newMembers) }}
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group {% if form_errors(form.amountTransactions) %}has-error{% endif %}">
+                        {{ form_label(form.amountTransactions, 'Сумма сделок', {'label_attr': {'class': 'control-label col-lg-3'}}) }}
+                        <div class="col-lg-4">
+                            {{ form_widget(form.amountTransactions, {'attr': {'class': 'form-control'}}) }}
+                            {% if form_errors(form.amountTransactions) %}
+                                <span id="required2-error" class="help-block">
+                                    {{ form_errors(form.amountTransactions) }}
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group {% if form_errors(form.transactionsOnExchange) %}has-error{% endif %}">
+                        {{ form_label(form.transactionsOnExchange, 'Сделки на бирже (шт.)', {'label_attr': {'class': 'control-label col-lg-3'}}) }}
+                        <div class="col-lg-4">
+                            {{ form_widget(form.transactionsOnExchange, {'attr': {'class': 'form-control'}}) }}
+                            {% if form_errors(form.transactionsOnExchange) %}
+                                <span id="required2-error" class="help-block">
+                                    {{ form_errors(form.transactionsOnExchange) }}
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group {% if form_errors(form.numberTransactions) %}has-error{% endif %}">
+                        {{ form_label(form.numberTransactions, 'Кол-во сделок (шт.)', {'label_attr': {'class': 'control-label col-lg-3'}}) }}
+                        <div class="col-lg-4">
+                            {{ form_widget(form.numberTransactions, {'attr': {'class': 'form-control'}}) }}
+                            {% if form_errors(form.numberTransactions) %}
+                                <span id="required2-error" class="help-block">
+                                    {{ form_errors(form.numberTransactions) }}
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div><!-- /.form-group -->
+                    {{ form_rest(form) }}
+                    <div class="form-group">
+                        <div class="control-label col-lg-3"></div>
+                        <div style="float: right" class="col-lg-9">
+                            <input type="submit" value="Сохранить" class="btn btn-metis-6 btn-sm">
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box">
+                <header>
+                    <div class="icons">
+                        <i class="fa fa-table"></i>
+                    </div>
+                    <h5>Вся статистика</h5>
+                </header>
+                <div id="collapse4" class="body">
+                    <table class="table table-bordered table-condensed table-hover table-striped dataTable">
+                        <thead>
+                        <tr class="grid-row-titles">
+                            <th class="sorting " style="color: black">Дата</th>
+                            <th class="sorting " style="color: black;">Ср. срок</th>
+                            <th class="sorting " style="color: black;">Ср. сумма</th>
+                            <th class="sorting " style="color: black;">Ср. ставка</th>
+                            <th class="sorting " style="color: black;">Всего уч-в</th>
+                            <th class="sorting " style="color: black;">Новых уч-в</th>
+                            <th class="sorting " style="color: black;">Сум. сделок</th>
+                            <th class="sorting " style="color: black;">Сделки на бирже</th>
+                            <th class="sorting " style="color: black;">Кол-во сделок</th>
+                            <th class="last-column" style=""></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for statistic in statistics %}
+                                <tr class="grid-row-cells even">
+                                    <td class="">{{ statistic.date|date('d-m-Y') }}</td>
+                                    <td>{{ statistic.averageTime }}</td>
+                                    <td>{{ statistic.averageAmount }}</td>
+                                    <td>{{ statistic.averageRate }}</td>
+                                    <td>{{ statistic.numberMembers }}</td>
+                                    <td>{{ statistic.newMembers }}</td>
+                                    <td>{{ statistic.amountTransactions }}</td>
+                                    <td>{{ statistic.transactionsOnExchange }}</td>
+                                    <td>{{ statistic.numberTransactions }}</td>
+                                    <td>
+                                        <a target="_self" href="{{ path('admin_settings_project_statistic_settings', {'id': statistic.id}) }}" class="action-icon" style="margin-left: 10px">
+                                            <i class="glyphicon glyphicon-edit"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <script>
+        $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd'
+        });
+    </script>
+{% endblock js %}

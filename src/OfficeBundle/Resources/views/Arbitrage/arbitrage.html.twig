@@ -1,0 +1,170 @@
+{% extends ':office:base.html.twig' %}
+
+{% form_theme form ':office:twig_theme.html.twig' %}
+
+{% block style %}
+    <link href="{{ asset('lib/argo/common/theme/scripts/plugins/tables/DataTables/media/css/DT_bootstrap.css') }}" rel="stylesheet" />
+{% endblock style %}
+
+{% block title %}{{ 'arbitrage.arbitrage'|trans }}{% endblock %}
+
+{% block title_content %}
+    {{ 'arbitrage.arbitrage'|trans }}
+{% endblock %}
+
+{% block content %}
+    <div class="innerLR">
+        <div class="row-fluid">
+            <!-- Column -->
+            <div class="span12">
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    {% include ':office:alert_success.html.twig' with {'message' : flashMessage} %}
+                {% endfor %}
+                {% for flashMessage in app.session.flashbag.get('error') %}
+                    {% include ':office:alert_error.html.twig' with {'message' : flashMessage} %}
+                {% endfor %}
+                <!-- Widget -->
+                <div class="widget">
+
+                    <!-- Widget heading -->
+                    <div class="widget-head">
+                        <h4 class="heading">{{ 'arbitrage.get_arbitrage'|trans }}</h4>
+                    </div>
+                    <!-- // Widget heading END -->
+
+                    <div class="widget-body">
+                        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                        <div class="row-fluid">
+                            <div class="span6">
+                                <div class="well">
+                                    <div class="control-group ">
+                                        <label for="buying_form_type_price" class="control-label required">{{ 'arbitrage.sum'|trans }}</label>
+                                        <div class="controls">
+                                            <div style="width: 87%;" class="input-append">
+                                                {% if amount >= 20 %}
+                                                    {% set sum = amount * settings.multiplier %}
+                                                {% else %}
+                                                    {% set sum = 0 %}
+                                                {% endif %}
+                                                {% if sum > settings.arbitrageMaxSum %}
+                                                    {% set sum = settings.arbitrageMaxSum %}
+                                                {% endif %}
+                                                <input type="text" style="color: #555555" class="span12 price" required="required" value="{{ sum }}" readonly="readonly">
+                                                <span style=" color: #262626; font-weight: bold" class="add-on">
+                                                     $
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group {% if form_errors(form.day) %}error{% endif %}">
+                                        {{ form_label(form.day, 'arbitrage.days'|trans, {'label_attr': {'class': 'control-label'}}) }}
+                                        <div class="controls">
+                                            {{ form_widget(form.day, {'attr': {'class': 'span12 time'}}) }}
+                                            {% if form_errors(form.day) %}
+                                                <p class="error help-block">
+                                                    <span class="label label-important">{{ form_errors(form.day) }}</span>
+                                                </p>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group ">
+                                        <label for="buying_form_type_price" class="control-label required">{{ 'arbitrage.percent'|trans }}</label>
+                                        <div class="controls">
+                                            <div style="width: 87%;" class="input-append">
+                                                <input type="text" style="color: #555555" class="span12 price" required="required" value="{{ commission }}" readonly="readonly">
+                                                <span style=" color: #262626; font-weight: bold" class="add-on">
+                                                     %
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="span6">
+                                <div class="well" style="height: 130px">
+                                    <div class="control-group ">
+                                        <label for="buying_form_type_price" class="control-label required">{{ 'arbitrage.return_sum'|trans }}</label>
+                                        <div class="controls">
+                                            <div style="width: 87%;" class="input-append">
+                                                <input type="text" style="color: #555555" class="span12 price" required="required" id="result_end" readonly="readonly">
+                                                <span style=" color: #262626; font-weight: bold" class="add-on">
+                                                     $
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{ form_rest(form) }}
+
+                        <div class="row-fluid" style="margin-top: 10px">
+                            <div class="span5"></div>
+                            <div class="span2" style="text-align: center">
+                                <button class="btn btn-success hidden-phone" type="submit">{{ 'arbitrage.get_arbitrage'|trans }}</button>
+                            </div>
+                            <div class="span5"></div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <!-- Column -->
+            <div class="span12">
+                <!-- Widget -->
+                <div class="widget">
+
+                    <!-- Widget heading -->
+                    <div class="widget-head">
+                        <h4 class="heading">{{ 'dashboard.statistic'|trans }}</h4>
+                    </div>
+                    <!-- // Widget heading END -->
+
+                    <div class="widget-body">
+                        {{ grid(grid, ':office:grid.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            calculate();
+
+            $( ".time" ).change(function() {
+                calculate();
+            });
+        });
+
+
+
+        function calculate()
+        {
+            var time = $('.time option:selected').text();
+            {% if amount >= 50 %}
+                {% set sum = amount * settings.multiplier %}
+            {% else %}
+                {% set sum = 0 %}
+            {% endif %}
+            {% if sum > settings.arbitrageMaxSum %}
+                {% set sum = settings.arbitrageMaxSum %}
+            {% endif %}
+            {% if amount >= 1000 %}
+                {% set percent = 0.4 %}
+            {% else %}
+                {% set percent = commission %}
+            {% endif %}
+            console.log({{ sum }});
+            $('#result_end').val(time * {{ percent }} / 100 * {{ sum }} + {{ sum }});
+        }
+    </script>
+{% endblock js %}

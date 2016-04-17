@@ -1,0 +1,308 @@
+M: Main account
+B: Bonus account
+No data: No data
+loyout:
+  welocome: Welcome
+  profile: Profile
+  edit_profile: Edit
+  you_status: Membership
+
+dashboard:
+  dashboard: Dashboard
+  main_wallet: Main wallet
+  arbitrage_wallet: Arbitrage wallet
+  bonus_wallet: Bonus wallet
+  main_account: Main account
+  arbitrage_account: Arbitrage account
+  bonus_account: Bonus account
+  statistic: Statistics
+  average_time: Average time
+  average_rate: Average rate
+  tickets_support: Support
+  new_ticket: New ticket
+  news: News
+  max_cource: Highest price
+  video_gallery: Video gallery
+  count_referrals: Referrals number
+  referral_bonus: Direct bonus
+  count_deposit: Total deposited
+  count_withdraw: Total withdrawn
+  points_bonus: Binary bonus
+  time_server: Server time
+  chart_buy_sell: Buy Sell chart
+  buying: Buy
+  selling: Sell
+  mining_rights: Mining points
+  mining_rights_in_work: Mining points in work
+  pool_wallet: Pool wallet
+
+profile:
+  my_profile: My profile
+  change: Edit
+  change_password: Change password
+
+support:
+  support: Support
+  new_ticket: New ticket
+  subject: Subject
+  message: Message
+  send: Send
+  send_success: Message sent!
+  status: Status
+  open: Open
+  answered: Answered
+  awaiting_reply: Awaiting reply
+  closed: Closed
+  correspondence: Message history
+  new_message: New message
+
+buy:
+  buy: Buy
+  purchase: Buy
+  quantity: Quantity
+  price: Price for
+  amount: Total
+  commission: Fee
+  buying_create_success: Request created!
+  buying_wait: Pending requests
+  buying_complete: Completed requests
+  date: Date
+  no_funds: Insufficient funds!
+  main_account: Main account
+  arbitrage_account: Arbitrage account
+  bonus_account: Bonus account
+  account: Account
+
+sale:
+  sale: Sell
+  saling: Sell
+  main_account: Main %currency% account
+  arbitrage_account: Arbitrage %currency% account
+  bonus_account: Bonus %currency% account
+  account: Account
+  no_funds: Insufficient funds!
+  main_eth_account: Main ETH account
+
+exchange:
+  exchange: Exchange
+  orders: Orders
+  orders_for_sale: Selling orders
+  orders_for_purchase: Buying orders
+  price: Price
+  history_trade: Trading history
+  date: Date
+  type: Type
+  quantity: Quantity
+  amount: Total
+
+marketing:
+  marketing: Affiliate program
+  status: Membership
+  binary: Binary
+  statistic: History
+  all_status: All memberships
+  available_statuses: Available memberships
+  price: Price
+  buy: Buy
+  on_account: Available amount
+  no_funds: Insufficient funds!
+  buy_success: Purchase completed successfully!
+
+binary:
+  binary: Binary
+  my_binary: My binary
+  on_left: Left
+  on_right: Right
+  left_points: Left points
+  right_points: Right points
+  total: Total
+  statuses: Statuses
+
+statistic:
+  statistic: History
+  statistic_to_points: Points history
+  date: Date
+  left_points: Left points
+  right_points: Right points
+  bonus: Bonus
+
+arbitrage:
+  arbitrage: Арбитраж
+  get_arbitrage: Взять арбитраж
+  days: Дней
+  sum: Сумма
+  percent: Процент
+  return_sum: Сумма возврата
+  outstanding_loan: Вы не погасили предыдущую задолженность по арбитражному кредиту!
+  credit_success: Кредит успешно получен!
+  error_add_funds: Пополните баланс!
+  sum_loan: Сумма займа
+  time: Срок
+  count_days: Кол-во дней
+  date_start: Дата займа
+  date_end: Дата погашения
+  status: Статус
+
+withdraw:
+  withdraw: Withdraw
+  withdraw_funds: Withdraw funds
+  account: Account
+  sum: Amount
+  type: Payment gateway
+  available_amount: Available amount
+  stattistic: History
+  status: Status
+  wait: Pending
+  done: Completed
+  refund: Refund
+  send_request: Send request
+  min_sum: Minimum amount 50$
+  no_funds: Insufficient funds!
+  request_submitted_success: Request sent successfully!
+
+deposit:
+  deposit: Deposit
+  add_funds: Add funds
+  sum: Amount
+  add: Add funds
+  choice_payment: Choose payment gateway
+  your_wallet_was_successfully_refilled: Add funds completed successfully!
+  stattistic: History
+  date: Date
+  system: Gateway
+  account: Account
+
+home:
+  home: Home
+  about: About
+  services: Founders
+  pages: Mining
+  blog: Video gallery
+  affiliate_program: Affiliate programm
+  mining_pool: Mining pool
+  contact: Contact
+  privacy: Privacy
+  contacts:
+    your_name: Your name
+    email_address: Email address
+    write_message: Message
+    submit: Send
+    drop_us_a_mail: Drop us a mail
+    facilisis_at_vero_eros: Facilisis at vero eros et accumsan et iusto odio dignissim blandit praesent luptatum dolor sit maet ipsum lorem delenit. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim.
+    hire_us: Hire us
+    we_provide_the_best_solutions: We provide the best solutions
+    please_drop_us_a_mail: Please drop us a mail along with ccumsan et iusto odio dignissim blandit praesent luptatum your project requirements  to
+    our_representative_will_be_in_touch: Our representative will be in touch with you within a week
+    discuss_a_project: Discuss a project
+  login:
+    username: Username
+    enter_username_and_password: Enter username and password
+    enter_username: Enter username
+    forgot_password: Forgot password?
+  registration:
+    registration: Sign up
+    terms: Terms & Conditions
+  about_us:
+      about: About
+  servicess:
+      services: Founders
+  pricing:
+    pricing: Mining
+  blogs:
+    blog: Video gallery
+
+transaction:
+  transaction: Transactions
+  statistic: History
+  date: Date
+  sum: Amount
+  mainWallet: Main wallet
+  bonusWallet: Bonus wallet
+  mainAccount: Main account
+  bonusAccount: Bonus account
+  add_funds: Add funds
+  withdraw: Withdraw
+  buy_status: Membership buying
+  sale_bid: Selling request
+  buy_bid: Buying request
+  delete_sale_bid: Delete selling request
+  delete_buy_bid: Delete buying request
+  mainEthereum: Main Ethereum
+  bonusEthereum: Bonus Ethereum
+
+referrals:
+  referrals: Referrals
+  my_referrals: My referrals
+  statistic: History
+  registrationDate: Sign up date
+  lastLogin: Last visit
+  username: Username
+  date: Date
+  bonus: Bonus
+  ref_link: Referral link
+  
+money_transaction:
+  money_transaction: Money transaction
+  money_transfer: Money Transfer
+  transfer_funds_to_main_account: Transfer funds to main account
+  sum: Amount
+  wallet: Wallet
+  available_amount: Available amount
+  transfer: Transfer
+  main_wallet: Main wallet
+  bonus_wallet: Bonus wallet
+  no_funds: Insufficient funds!
+  transfer_success: Money transfer is successful!
+
+mining_pool:
+  mining_pool: Mining pool
+  mining: Mining
+  history: History
+  eth_mining_rights: ETH mining points
+  buy: Buy
+  send_to_pool: Send to pool
+  mining_rights_in_work: Mining points in work
+  pool_wallet: Pool wallet
+  sell: Sell
+  convert: Convert
+  rates: Rates
+  split_histoty: Split history
+  split_progress_bar: Split progress bar
+  mining_history: Mining history
+  start_date: Start date
+  end_date: End date
+  mining_righth: Mining points
+  duration: Duration (days)
+  status: Status
+  in_progres: In progress
+
+mining:
+  buy: Buy
+  sell: Sell
+  convert: Convert
+  cancel: Cancel
+  main_account: Main account
+  current_rate: Current rate
+  mining_rights: Mining points
+  no_status: You need to upgrade your account
+  not_funds: Insufficient funds!
+  buy_success: Buying completed successfully!
+  sell_success: Selling completed successfully!
+  convert_success: Conversion completed successfully!
+  send_success: Transaction completed successfully!!
+  avalable_mr: Avalable MP
+  send: Send
+  start_date: Start date
+  end_date: End Date
+  mining_rights: Mining points
+  duration: Duration
+  status: Status
+  in_progress: In progress
+  finished: Finished
+  amount: Amount
+  pool_wallet: Pool wallet
+  mr: MP
+  date: Date
+  transaction: Transaction
+  buy_mining_rights: Buy mining points
+  convertation: Convert

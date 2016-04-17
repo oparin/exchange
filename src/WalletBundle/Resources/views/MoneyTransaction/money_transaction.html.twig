@@ -1,0 +1,124 @@
+{% extends ':office:base.html.twig' %}
+
+{% block title %}{{ 'money_transaction.money_transfer'|trans }}{% endblock %}
+
+{% block title_content %}
+    {{ 'money_transaction.money_transfer'|trans }}
+{% endblock %}
+
+{% block content %}
+    <div class="innerLR">
+        <div class="row-fluid">
+            <!-- Column -->
+            <div class="span12">
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    {% include ':office:alert_success.html.twig' with {'message' : flashMessage} %}
+                {% endfor %}
+                {% for flashMessage in app.session.flashbag.get('error') %}
+                    {% include ':office:alert_error.html.twig' with {'message' : flashMessage} %}
+                {% endfor %}
+                <!-- Widget -->
+                <div class="widget">
+                    <!-- Widget heading -->
+                    <div class="widget-head">
+                        <h4 class="heading">
+                            {{ 'money_transaction.transfer_funds_to_main_account'|trans }}
+                        </h4>
+                    </div>
+                    <!-- // Widget heading END -->
+
+                    <div class="widget-body" style="">
+                        {#<div class="alert" style="background-color: #FEFF9F; color: black; text-align: center; height: 20px">#}
+                        {#<div class="row-fluid">#}
+                        {#<div class="span6">#}
+                        {#<strong>M</strong> - {{ 'buy.main_account'|trans }}#}
+                        {#</div>#}
+                        {#<div class="span6">#}
+                        {#<strong>A</strong> - {{ 'buy.arbitrage_account'|trans }}#}
+                        {#</div>#}
+                        {#</div>#}
+                        {#</div>#}
+                        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                        <div class="row-fluid">
+                            <div class="span6">
+                                <div class="well">
+                                    <!-- Group -->
+                                    <div class="control-group">
+                                        {{ form_label(form.wallet, 'money_transaction.wallet'|trans, {'label_attr': {'class': 'control-label'}}) }}
+                                        <div class="controls">
+                                            {{ form_widget(form.wallet, {'attr': {'class': 'span12 wallet'}}) }}
+                                            {% if form_errors(form.wallet) %}
+                                                <p class="error help-block">
+                                                    <span class="label label-important">{{ form_errors(form.wallet) }}</span>
+                                                </p>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <!-- Group -->
+                                    <div class="control-group">
+                                        {{ form_label(form.sum, 'money_transaction.sum'|trans, {'label_attr': {'class': 'control-label'}}) }}
+                                        <div class="controls">
+                                            {{ form_widget(form.sum, {'attr': {'class': 'span12'}}) }}
+                                            {% if form_errors(form.sum) %}
+                                                <p class="error help-block">
+                                                    <span class="label label-important">{{ form_errors(form.sum) }}</span>
+                                                </p>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span6">
+                                <div class="well" style="height: 80px">
+                                    <div class="control-group">
+                                        <label class="control-label required" style="width: 125px">
+                                            {{ 'money_transaction.available_amount'|trans }}
+                                        </label>
+                                        <div class="controls">
+                                            <div style="width: 87%" class="input-append">
+                                                <input id="sum" type="text" class="span12" disabled readonly style="text-align: right" value="0">
+                                                <span style=" color: #262626; font-weight: bold" class="add-on">
+                                                     $
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{ form_rest(form) }}
+                        <div class="row-fluid" style="margin-top: 10px">
+                            <div class="span4"></div>
+                            <div class="span4" style="text-align: center">
+                                <button class="btn btn-success hidden-phone" type="submit">{{ 'money_transaction.transfer'|trans }}</button>
+                            </div>
+                            <div class="span4"></div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            getSum($(".wallet").val());
+        });
+        $(".wallet").change(function() {
+            getSum($(".wallet").val());
+        });
+
+        function getSum(type)
+        {
+            if (type == 'M') {
+                $("#sum").val({{ wallets[0].sum }})
+            } else if (type == 'B') {
+                $("#sum").val({{ wallets[2].sum }})
+            };
+        };
+    </script>
+{% endblock js %}

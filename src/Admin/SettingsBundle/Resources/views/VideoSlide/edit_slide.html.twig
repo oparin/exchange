@@ -1,0 +1,95 @@
+{% extends '::base.html.twig' %}
+
+{% form_theme form '::twig_theme.html.twig' %}
+
+{% block title_content %}<i class="fa fa-gear"></i>&nbsp; Настройки{% endblock title_content %}
+
+{% block content %}
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        {% include '::alert_succes.html.twig' with {'text' : flashMessage} %}
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        {% include '::alert_error.html.twig' with {'text' : flashMessage} %}
+    {% endfor %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box">
+                <header>
+                    <div class="icons">
+                        <i class="fa fa-edit"></i>
+                    </div>
+                    <h5>Видео файл</h5>
+                </header>
+                <div id="collapse4" class="body">
+                    {{ form_start(form, {'attr': {'class': 'form-horizontal'} }) }}
+                    <div class="form-group {% if form_errors(form.videoFile) %}has-error{% endif %}">
+                        {{ form_label(form.videoFile, 'Видео файл', {'label_attr': {'class': 'control-label col-lg-2'}}) }}
+                        <div class="col-lg-4">
+                            {{ form_widget(form.videoFile, {'attr': {'class': 'form-control', 'placeholder': ''}}) }}
+                            {% if form_errors(form.videoFile) %}
+                                <span id="required2-error" class="help-block">{{ form_errors(form.videoFile) }}</span>
+                            {% endif %}
+                        </div>
+                    </div><!-- /.form-group -->
+
+                    {{ form_rest(form) }}
+                    <div class="form-group">
+                        <div class="control-label col-lg-2"></div>
+                        <div style="" class="col-lg-9">
+                            <input type="submit" value="Сохранить" class="btn btn-metis-6 btn-sm">
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box">
+                <header>
+                    <div class="icons">
+                        <i class="fa fa-table"></i>
+                    </div>
+                    <h5>Все Файлы</h5>
+                </header>
+                <div id="collapse4" class="body">
+                    <table class="table table-bordered table-condensed table-hover table-striped dataTable">
+                        <thead>
+                        <tr class="grid-row-titles">
+                            <th class="sorting " style="color: black; width: 40%">Имя файла</th>
+                            <th class="last-column" style="width: 10%"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for file in files %}
+                            <tr class="grid-row-cells even">
+                                <td>{{ file.video }}</td>
+                                <td class="" style="text-align: center">
+                                    <a target="_self" href="{{ path('admin_video_slide', {'id': file.id}) }}" class="action-icon" style="margin-left: 10px">
+                                        <i class="glyphicon glyphicon-edit"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <script>
+        $(function() {
+            Metis.formWizard();
+        });
+    </script>
+    <script>
+        $(function() {
+            Metis.formGeneral();
+        });
+    </script>
+{% endblock js %}

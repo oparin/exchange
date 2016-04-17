@@ -1,0 +1,319 @@
+M: Основной счёт
+B: Бонусный счёт
+No data: Нет результатов
+loyout:
+  welocome: Добро пожаловать
+  profile: Профиль
+  edit_profile: Изменить
+  you_status: Ваш статус
+
+dashboard:
+  dashboard: Основная панель
+  main_wallet: Основной кошелёк
+  arbitrage_wallet: Арбитражный кошелёк
+  bonus_wallet: Бонусный кошелёк
+  main_account: Основной счёт
+  arbitrage_account: Арбитражный счёт
+  bonus_account: Бонусный счёт
+  statistic: Статистика
+  average_time: Средний срок
+  average_rate: Средняя ставка
+  tickets_support: Обращение в поддержку
+  new_ticket: Новый тикет
+  news: Новости
+  max_cource: Максимальный курс
+  video_gallery: Видео галлерея
+  count_referrals: Количество рефералов
+  referral_bonus: Бонус с рефералов
+  count_deposit: Всего зачислено
+  count_withdraw: Всего выведено
+  points_bonus: Бонус с баллов
+  time_server: Время сервера
+  chart_buy_sell: График покупок продаж
+  buying: Покупки
+  selling: Продажи
+  mining_rights: Очки на добычу
+  mining_rights_in_work: Очки на добычу в работе
+  pool_wallet: Кошелек пула
+
+profile:
+  my_profile: Мой профиль
+  change: Изменить
+  change_password: Изменить пароль
+
+support:
+  support: Поддержка
+  new_ticket: Новый тикет
+  subject: Тема
+  message: Сообщение
+  send: Отправить
+  send_success: Сообщение отправлено!
+  status: Статус
+  open: Открыт
+  answered: Ответ получен
+  awaiting_reply: Ожидает ответа
+  closed: Закрыт
+  correspondence: Переписка
+  new_message: Новое сообщение
+
+buy:
+  buy: Купить
+  purchase: Покупка
+  quantity: Количество
+  price: Цена за
+  amount: Всего
+  commission: Комиссия
+  buying_create_success: Заявка создана!
+  buying_wait: Заявки в ожидании
+  buying_complete: Завершенные заявки
+  date: Дата
+  no_funds: У Вас нехватает средств!
+  main_account: Основной счёт
+  arbitrage_account: Арбитражный счёт
+  bonus_account: Бонусный счёт
+  account: Счёт
+
+sale:
+  sale: Продать
+  saling: Продажа
+  main_account: Основной %currency% счёт
+  arbitrage_account: Арбитражный %currency% счёт
+  bonus_account: Бонусный %currency% счёт
+  account: Счёт
+  no_funds: У Вас нехватает средств!
+  main_eth_account: Основной ETH счет
+
+exchange:
+  exchange: Биржа
+  orders: Ордера
+  orders_for_sale: Ордера на продажу
+  orders_for_purchase: Ордера на покупку
+  price: Цена
+  history_trade: История сделок
+  date: Дата
+  type: Тип
+  quantity: Количество
+  amount: Всего
+
+marketing:
+  marketing: Маркетинг
+  status: Статус
+  binary: Бинар
+  statistic: Статистика
+  all_status: Все статусы
+  available_statuses: Доступные статусы
+  price: Цена
+  buy: Купить
+  on_account: На счету
+  no_funds: У Вас нехватает средств!
+  buy_success: Покупка прошла успешно!
+
+binary:
+  binary: Бинар
+  my_binary: Мой Бинар
+  on_left: На лево
+  on_right: На право
+  left_points: Слева
+  right_points: Справа
+  total: Всего
+  statuses: Статусы
+
+statistic:
+  statistic: Статистика
+  statistic_to_points: Статистика по баллам
+  date: Дата
+  left_points: Баллов Слева
+  right_points: Баллов Справа
+  bonus: Бонус
+
+arbitrage:
+  arbitrage: Арбитраж
+  get_arbitrage: Взять арбитраж
+  days: Дней
+  sum: Сумма
+  percent: Процент
+  return_sum: Сумма возврата
+  outstanding_loan: Вы не погасили предыдущую задолженность по арбитражному кредиту!
+  credit_success: Кредит успешно получен!
+  error_add_funds: Пополните баланс!
+  sum_loan: Сумма займа
+  time: Срок
+  count_days: Кол-во дней
+  date_start: Дата займа
+  date_end: Дата погашения
+  status: Статус
+
+withdraw:
+  withdraw: Вывод
+  withdraw_funds: Вывод средств
+  account: Счёт
+  sum: Сумма
+  type: Аккаунт
+  available_amount: Доступная сумма
+  stattistic: Статистика
+  status: Статус
+  wait: Ожидание
+  done: Выплачено
+  refund: Возврат
+  send_request: Отправить запрос
+  min_sum: Минимальная сумма на вывод 50$
+  no_funds: У Вас нехватает средств!
+  request_submitted_success: Запрос отправлен успешно!
+
+deposit:
+  deposit: Депозит
+  add_funds: Ввод средств
+  sum: Сумма
+  add: Пополнить
+  choice_payment: Выбор платежной системы
+  your_wallet_was_successfully_refilled: Ваш кошелёк успешно пополнен!
+  stattistic: Статистика
+  date: Дата
+  system: Система
+  account: Аккаунт
+
+home:
+  home: Главная
+  about: О нас
+  services: Основатели
+  pages: Майнинг
+  blog: Видео галлерея
+  contact: Контакты
+  affiliate_program: Партнёрская программа
+  mining_pool: Майнинг пул
+  contacts:
+    your_name: Ваше имя
+    email_address: Email Адресс
+    write_message: Напишите сообщение
+    submit: Отправить
+    drop_us_a_mail: Drop us a mail
+    facilisis_at_vero_eros: Facilisis at vero eros et accumsan et iusto odio dignissim blandit praesent luptatum dolor sit maet ipsum lorem delenit. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim.
+    hire_us: Hire us
+    we_provide_the_best_solutions: We provide the best solutions
+    please_drop_us_a_mail: Please drop us a mail along with ccumsan et iusto odio dignissim blandit praesent luptatum your project requirements  to
+    our_representative_will_be_in_touch: Our representative will be in touch with you within a week
+    discuss_a_project: Discuss a project
+  login:
+    username: Имя пользователя
+    enter_username_and_password: Введите имя и пароль
+    enter_username: Введите имя пользователя
+    forgot_password: Забыли пароль?
+  registration:
+    registration: Регистрация
+  about_us:
+      about: О нас
+      lorem_ipsum_dolor_sit_amet: Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam erat volutpat. Minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis aliquip ex ea commodo consequat.
+      facilisis_at_vero_eros: Facilisis at vero eros et accumsan et iusto odio dignissim blandit praesent luptatum dolor sit maet ipsum lorem delenit. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim.
+      we_have: >
+              We have earned the award for <span class="color">"Best practices in 2013"</span><br/>at the World-Tech Expo in Chicago.
+      facilisis_at_vero_eros: Facilisis at vero eros et accumsan et iusto odio dignissim blandit praesent luptatum dolor sit maet ipsum lorem delenit. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim
+      our_approach: >
+                  Our <span class="color">Approach</span>
+      claritas_est_etiam_processus_dynamicus: Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi anteposuerit litterarum nobis videntur parum clari, fiant sollemnes in futurum
+      we_are_leaders: >
+                    We are <span class="color">Leaders</span>
+      eodem_modo_typi: Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima
+      our_success_edge: >
+                    Our <span class="color">Success Edge</span>
+      nam_liber_tempor_cum_soluta: Nam liber tempor cum soluta nobis eleifend option congue nihil  sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, formas quarta decima et quinta decima. Eodem modo typi nobis videntur parum clari, fiant sollemnes in futurum humanitatis per seacula
+  servicess:
+      services: Основатели
+      lorem_ipsum_dolor_sit_amet: Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam erat volutpat. Minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis aliquip ex ea commodo consequat
+      view_portfolio: View portfolio
+      facilisis_at_vero_eros: Facilisis at vero eros et accumsan et iusto odio dignissim blandit praesent luptatum dolor sit maet ipsum lorem delenit. Nam liber tempor cum soluta nobis eleifend option
+  pricing:
+    pricing: Майнинг
+  blogs:
+    blog: Видео галлерея
+
+transaction:
+  transaction: Транзакции
+  statistic: Статистика транзакций
+  date: Дата
+  sum: Сумма
+  mainWallet: Основной кошелёк
+  bonusWallet: Бонусный кошелёк
+  mainAccount: Основной счёт
+  bonusAccount: Бонусный счёт
+  add_funds: Пополнение баланса
+  withdraw: Вывод средств
+  buy_status: Покупка статуса
+  sale_bid: Заявка на продажу
+  buy_bid: Заявка на покупку
+
+referrals:
+  referrals: Рефералы
+  my_referrals: Мои Рефералы
+  statistic: Статистика
+  registrationDate: Дата регистрации
+  lastLogin: Последнее посещение
+  username: Имя пользователя
+  date: Дата
+  bonus: Бонус
+  ref_link: Реферальная ссылка
+
+money_transaction:
+  money_transaction: Перевод средств
+  money_transfer: Перевод средств
+  transfer_funds_to_main_account: Перевод средств на основной счет
+  sum: Сумма
+  wallet: Кошелёк
+  available_amount: Доступная сумма
+  transfer: Перевести
+  main_wallet: Основной кошелек
+  bonus_wallet: Бонусный кошелек
+  no_funds: Недостаточно средств!
+  transfer_success: Перевод средств завершен успешно!
+
+mining_pool:
+  mining_pool: Майнинг пул
+  mining: Добыча
+  history: История
+  eth_mining_rights: ETH Очки на добычу
+  buy: Купить
+  send_to_pool: Отправить в пул
+  mining_rights_in_work: Очки на добычу в работе
+  pool_wallet: Кошелек пула
+  sell: Продать
+  convert: Конвертировать
+  rates: Курс
+  split_histoty: История сплитов
+  split_progress_bar: Прогресс бар сплита
+  mining_history: История майнинга
+  start_date: Дата начала
+  end_date: Дата завершения
+  mining_righth: Очки на добычу
+  duration: Длительность (дней)
+  status: Статус
+  in_progres: В процессе
+
+mining:
+  buy: Купить
+  sell: Продать
+  convert: Конвертировать
+  cancel: Отмена
+  main_account: Основной счет
+  current_rate: Текущий курс
+  mining_rights: Очки на добычу
+  no_status: Вам нужно повысить Ваш статус
+  not_funds: Недостаточно средств!
+  buy_success: Покупка прошла успешно!
+  sell_success: Продажа прошла успешно!
+  convert_success: Конвертация прошла успешно!
+  send_success: Перевод прошел успешно!
+  avalable_mr: Доступно ОД
+  send: Отправить
+  start_date: Дата начала
+  end_date: Дата завершения
+  mining_rights: Очки на добычу
+  duration: Длительность
+  status: Статусы
+  in_progress: В процессе
+  finished: Завершено
+  amount: Количество
+  pool_wallet: Кошелек пула
+  mr: ОД
+  date: Дата
+  transaction: Транзакции
+  buy_mining_rights: Купить очки на добычу
+  convertation: Конвертация

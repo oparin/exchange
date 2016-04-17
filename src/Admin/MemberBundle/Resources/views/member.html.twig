@@ -1,0 +1,157 @@
+{% extends '::base.html.twig' %}
+
+{% form_theme form '::twig_theme.html.twig' %}
+
+{% block styles %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/Uniform.js/2.1.2/themes/default/css/uniform.default.min.css">
+{% endblock styles %}
+
+{% block title_content %}<i class="fa fa-user"></i>&nbsp; Пользователь{% endblock title_content %}
+
+{% block content %}
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        {% include '::alert_succes.html.twig' with {'text' : flashMessage} %}
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        {% include '::alert_error.html.twig' with {'text' : flashMessage} %}
+    {% endfor %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box">
+                <header>
+                    <div class="icons">
+                        <i class="fa fa-edit"></i>
+                    </div>
+                    <h5>Пользователь</h5>
+                </header>
+                <div id="collapse4" class="body">
+                    {{ form_start(form, {'attr': {'class': 'form-horizontal'} }) }}
+                    <div class="form-group {% if form_errors(form.username) %}has-error{% endif %}">
+                        {{ form_label(form.username, 'Имя Пользователя', {'label_attr': {'class': 'control-label col-lg-3'}}) }}
+                        <div class="col-lg-4">
+                            {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder': '0'}}) }}
+                            {% if form_errors(form.username) %}
+                                <span id="required2-error" class="help-block">{{ form_errors(form.username) }}</span>
+                            {% endif %}
+                        </div>
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group {% if form_errors(form.email) %}has-error{% endif %}">
+                        {{ form_label(form.email, 'Email', {'label_attr': {'class': 'control-label col-lg-3'}}) }}
+                        <div class="col-lg-4">
+                            {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': '0'}}) }}
+                            {% if form_errors(form.email) %}
+                                <span id="required2-error" class="help-block">{{ form_errors(form.email) }}</span>
+                            {% endif %}
+                        </div>
+                    </div><!-- /.form-group -->
+
+                    {% for wallet in form.wallets %}
+                        <div class="form-group {% if form_errors(wallet.sum) %}has-error{% endif %}">
+                            {{ form_label(wallet.sum, 'Кошелёк ' ~ wallet.vars.value.type.name, {'label_attr': {'class': 'control-label col-lg-3'}}) }}
+                            <div class="col-lg-4">
+                                {{ form_widget(wallet.sum, {'attr': {'class': 'form-control', 'placeholder': '0'}}) }}
+                                {% if form_errors(wallet.sum) %}
+                                    <span id="required2-error" class="help-block">{{ form_errors(wallet.sum) }}</span>
+                                {% endif %}
+                            </div>
+                        </div><!-- /.form-group -->
+                    {% endfor %}
+
+                    {% for account in form.accounts %}
+                        <div class="form-group {% if form_errors(account.sum) %}has-error{% endif %}">
+                            {{ form_label(account.sum, 'Счёт ' ~ account.vars.value.type.name, {'label_attr': {'class': 'control-label col-lg-3'}}) }}
+                            <div class="col-lg-4">
+                                {{ form_widget(account.sum, {'attr': {'class': 'form-control', 'placeholder': '0'}}) }}
+                                {% if form_errors(account.sum) %}
+                                    <span id="required2-error" class="help-block">{{ form_errors(account.sum) }}</span>
+                                {% endif %}
+                            </div>
+                        </div><!-- /.form-group -->
+                    {% endfor %}
+
+                    {% for currenc in form.currency %}
+                        <div class="form-group {% if form_errors(currenc.sum) %}has-error{% endif %}">
+                            {{ form_label(currenc.sum, 'Счёт BTC ' ~ currenc.vars.value.type.name, {'label_attr': {'class': 'control-label col-lg-3'}}) }}
+                            <div class="col-lg-4">
+                                {{ form_widget(currenc.sum, {'attr': {'class': 'form-control', 'placeholder': '0'}}) }}
+                                {% if form_errors(currenc.sum) %}
+                                    <span id="required2-error" class="help-block">{{ form_errors(currenc.sum) }}</span>
+                                {% endif %}
+                            </div>
+                        </div><!-- /.form-group -->
+                    {% endfor %}
+
+                    <div class="form-group {% if form_errors(form.miningRights) %}has-error{% endif %}">
+                        {{ form_label(form.miningRights, 'Очки на добычу', {'label_attr': {'class': 'control-label col-lg-3'}}) }}
+                        <div class="col-lg-4">
+                            {{ form_widget(form.miningRights, {'attr': {'class': 'form-control', 'placeholder': '0'}}) }}
+                            {% if form_errors(form.miningRights) %}
+                                <span id="required2-error" class="help-block">{{ form_errors(form.miningRights) }}</span>
+                            {% endif %}
+                        </div>
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group {% if form_errors(form.poolWallet) %}has-error{% endif %}">
+                        {{ form_label(form.poolWallet, 'Кошелек пула', {'label_attr': {'class': 'control-label col-lg-3'}}) }}
+                        <div class="col-lg-4">
+                            {{ form_widget(form.poolWallet, {'attr': {'class': 'form-control', 'placeholder': '0'}}) }}
+                            {% if form_errors(form.poolWallet) %}
+                                <span id="required2-error" class="help-block">{{ form_errors(form.poolWallet) }}</span>
+                            {% endif %}
+                        </div>
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group {% if form_errors(form.rating) %}has-error{% endif %}">
+                        {{ form_label(form.rating, 'Рейтинг', {'label_attr': {'class': 'control-label col-lg-3'}}) }}
+                        <div class="col-lg-4">
+                            {{ form_widget(form.rating, {'attr': {'class': 'form-control', 'placeholder': '0'}}) }}
+                            {% if form_errors(form.rating) %}
+                                <span id="required2-error" class="help-block">{{ form_errors(form.rating) }}</span>
+                            {% endif %}
+                        </div>
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group {% if form_errors(form.registrationBonus) %}has-error{% endif %}">
+                        {{ form_label(form.registrationBonus, 'Бонус регистрации', {'label_attr': {'class': 'control-label col-lg-3'}}) }}
+                        <div class="col-lg-4">
+                            {{ form_widget(form.registrationBonus, {'attr': {'class': 'form-control', 'placeholder': '0'}}) }}
+                            {% if form_errors(form.registrationBonus) %}
+                                <span id="required2-error" class="help-block">{{ form_errors(form.registrationBonus) }}</span>
+                            {% endif %}
+                        </div>
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group">
+                        {{ form_label(form.locked, 'Заблокировать', {'label_attr': {'class': 'control-label col-lg-3'}}) }}
+                        <div class="col-lg-4">
+                            <div class="checkbox">
+                                {{ form_widget(form.locked, {'attr': {'class': 'uniform'}}) }}
+                            </div>
+                        </div>
+                    </div><!-- /.row -->
+
+                    {{ form_rest(form) }}
+                    <div class="form-group">
+                        <div class="control-label col-lg-3"></div>
+                        <div style="float: right" class="col-lg-9">
+                            <input type="submit" value="Сохранить" class="btn btn-metis-6 btn-sm">
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Uniform.js/2.1.2/jquery.uniform.min.js"></script>
+    <script>
+        $(function() {
+            $('.uniform').uniform();
+        });
+    </script>
+{% endblock js %}
